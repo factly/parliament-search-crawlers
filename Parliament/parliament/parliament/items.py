@@ -10,7 +10,7 @@ from scrapy.item import Item, Field
 
 class ParliamentItem(Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    # name = Field()
     question_number = Field()
     question_type = Field()
     date = Field()
@@ -21,3 +21,4 @@ class ParliamentItem(Item):
     english_pdf = Field()
     hindi_pdf = Field()
     text = Field()
+    meta = Field()
