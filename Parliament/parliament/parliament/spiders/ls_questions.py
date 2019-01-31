@@ -14,6 +14,12 @@ class LsQuestionsSpider(scrapy.Spider):
     name = 'ls_questions'
     # allowed_domains = ['http://164.100.47.194']
     start_urls = ['http://164.100.47.194/Loksabha/Questions/Qtextsearch.aspx/']
+    meta = {}
+    page_flag = False
+
+    # Use the following two lines to run the crawler from a specific page
+    # meta["current_page"] = 347
+    # page_flag = True
 
     # This will act as the entry point of the spider
     def parse(self, response):
@@ -36,19 +42,21 @@ class LsQuestionsSpider(scrapy.Spider):
         }
 
         # Some metadata for debugging purpose
-        meta = {}
-        meta["total_pages"] = int(
+        self.meta["total_pages"] = int(
             response.css("span#ContentPlaceHolder1_lblfrom::text").extract_first().strip().split(' ')[1])
 
         # Limit the number of pages to test the script
         # meta["total_pages"] = 5
-        meta["current_page"] = int(response.css("input#ContentPlaceHolder1_txtpage::attr(value)").extract_first())
-        meta["page_url"] = response.request.url
+        if not(self.page_flag):
+            self.meta["current_page"] = int(response.css("input#ContentPlaceHolder1_txtpage::attr(value)").extract_first())
+        else:
+            self.page_flag = False
+        self.meta["page_url"] = response.request.url
 
         # Select all questions from the page (currently 10 per page)
         questions = response.css('table.member_list_table > tr')
         for question in questions:
-            meta["fetched_on"] = str(datetime.datetime.now())
+            self.meta["fetched_on"] = str(datetime.datetime.now())
 
             # Writing details of each question to a ParliamentItem object (see items.py for more details)
             item = ParliamentItem()
@@ -65,16 +73,16 @@ class LsQuestionsSpider(scrapy.Spider):
             item["subject"] = question.css("td[style*='width: 30%'] a::text").extract_first()
             item["link"] = "http://164.100.47.194/Loksabha/Questions/" + \
                            question.css("td[style*='width: 30%'] a::attr(href)").extract()[0]
-            item["meta"] = meta
+            item["meta"] = self.meta
             # print(item)
             item = self.parse_question(item)
             yield item
 
         # If this is not the last page go to the next page
-        if meta["current_page"] < meta["total_pages"]:
-            form_data['ctl00$ContentPlaceHolder1$txtpage'] = str(meta["current_page"] + 1)
+        if self.meta["current_page"] < self.meta["total_pages"]:
+            form_data['ctl00$ContentPlaceHolder1$txtpage'] = str(self.meta["current_page"] + 1)
             yield scrapy.FormRequest(
-                meta["page_url"],
+                self.meta["page_url"],
                 formdata=form_data,
                 callback=self.parse,
             )
