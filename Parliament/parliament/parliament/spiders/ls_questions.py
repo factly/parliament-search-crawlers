@@ -39,6 +39,9 @@ class LsQuestionsSpider(scrapy.Spider):
         meta = {}
         meta["total_pages"] = int(
             response.css("span#ContentPlaceHolder1_lblfrom::text").extract_first().strip().split(' ')[1])
+
+        # Limit the number of pages to test the script
+        # meta["total_pages"] = 5
         meta["current_page"] = int(response.css("input#ContentPlaceHolder1_txtpage::attr(value)").extract_first())
         meta["page_url"] = response.request.url
 

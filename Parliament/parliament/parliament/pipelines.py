@@ -23,6 +23,10 @@ class MongoDBPipeline(object):
         self.collection = db[config["mongo_collection"]]
 
     def process_item(self, item, spider):
-        self.collection.insert(dict(item))
-        logging.debug("Question added to MongoDB database!")
-        return item
+        if self.collection.find({"question_number": item["question_number"]}).count() > 0:
+            logging.debug("Question already exists in database!")
+            return item
+        else:
+            self.collection.insert(dict(item))
+            logging.debug("Question added to MongoDB database!")
+            return item
