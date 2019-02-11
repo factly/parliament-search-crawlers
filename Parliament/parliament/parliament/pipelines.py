@@ -23,7 +23,7 @@ class MongoDBPipeline(object):
         self.collection = db[config["mongo_collection"]]
 
     def process_item(self, item, spider):
-        if self.collection.find({"question_number": item["question_number"]}).count() > 0:
+        if self.collection.find({"qref": item["qref"]}).count() > 0:
             logging.debug("Question already exists in database!")
             return item
         else:

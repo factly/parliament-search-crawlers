@@ -13,6 +13,7 @@ class ParliamentItem(Item):
     # name = Field()
     question_number = Field()
     question_type = Field()
+    qref = Field()
     date = Field()
     ministry = Field()
     members = Field()
