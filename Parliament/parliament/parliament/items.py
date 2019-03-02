@@ -11,6 +11,7 @@ from scrapy.item import Item, Field
 class ParliamentItem(Item):
     # define the fields for your item here like:
     # name = Field()
+    lsno = Field()
     question_number = Field()
     question_type = Field()
     qref = Field()

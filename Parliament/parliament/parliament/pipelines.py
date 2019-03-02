@@ -10,23 +10,24 @@ import pymongo
 # from scrapy.conf import settings
 from scrapy.exceptions import DropItem
 import logging
-import json
-import os
+# import json
+# import os
 
 
 class MongoDBPipeline(object):
-    def __init__(self):
-        config_file = open('config.json')
-        config = json.load(config_file)
-        client = pymongo.MongoClient(config["mongo_server"])
-        db = client[config["mongo_database"]]
-        self.collection = db[config["mongo_collection"]]
+    # def __init__(self):
+        # config_file = open('config.json')
+        # config = json.load(config_file)
+        # client = pymongo.MongoClient(config["mongo_server"])
+        # db = client[config["mongo_database"]]
+        # self.collection = db[config["mongo_collection"]]
 
     def process_item(self, item, spider):
-        if self.collection.find({"qref": item["qref"]}).count() > 0:
+        collection = spider.collection
+        if collection.find({"qref": item["qref"]}).count() > 0:
             logging.debug("Question already exists in database!")
             return item
         else:
-            self.collection.insert(dict(item))
+            collection.insert(dict(item))
             logging.debug("Question added to MongoDB database!")
             return item
