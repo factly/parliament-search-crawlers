@@ -26,7 +26,7 @@ class LsQuestionsSpider(scrapy.Spider):
     page_flag = False
 
     # Use the following two lines to run the crawler from a specific page
-    current_page = 2195
+    current_page = 1
     meta["current_page"] = current_page
     page_flag = True
 
@@ -70,6 +70,7 @@ class LsQuestionsSpider(scrapy.Spider):
             for question in questions:
                 # Writing details of each question to a ParliamentItem object (see items.py for more details)
                 item = ParliamentItem()
+                item['lsno'] = 16
                 item['link'] = "http://164.100.47.194/Loksabha/Questions/" + question.css("td[style*='width: 30%'] a::attr(href)").extract()[0]
                 item['qref'] = re.search("qref=[0-9]+",item['link']).group().split("=")[1]
                 if self.collection.find({"qref": item["qref"]}).count() > 0:
