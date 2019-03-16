@@ -21,7 +21,7 @@ class LsPastQuestionsSpider(scrapy.Spider):
     name = 'ls_past_questions'
     
     #Specify Lok Sabha Number
-    ls_number = 14
+    ls_number = 15
 
     # allowed_domains = ['http://164.100.47.194']
     start_urls = ['http://164.100.47.194/Loksabha/Questions/qsearch15.aspx?lsno='+str(ls_number)]

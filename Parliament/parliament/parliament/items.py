@@ -24,3 +24,16 @@ class ParliamentItem(Item):
     hindi_pdf = Field()
     text = Field()
     meta = Field()
+
+class RajyaSabhaItem(Item):
+    session = Field()
+    question_number = Field()
+    question_type = Field()
+    date = Field()
+    ministry = Field()
+    members = Field()
+    subject = Field()
+    text = Field()
+    meta = Field()
+    english_doc = Field()
+    hindi_doc =Field() 

@@ -68,13 +68,7 @@ ROBOTSTXT_OBEY = True
 #    'parliament.pipelines.ParliamentPipeline': 300,
 #}
 
-ITEM_PIPELINES = {'parliament.pipelines.MongoDBPipeline' : 300}
-#
-# MONGODB_SERVER = "mongodb+srv://database-manager:s96kzwNljaYqg1Eb@cluster0-r4rsa.mongodb.net/test?retryWrites=true"
-# # MONGODB_PORT = 27017
-# MONGODB_DB = "test"
-# MONGODB_COLLECTION = "items"
-
+ITEM_PIPELINES = {'parliament.pipelines.MongoDBPipelineLokSabha' : 300}
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

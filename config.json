@@ -4,5 +4,6 @@
   "mongo_collection": {
     "current": "ls_questions",
     "old": "ls_old_questions"
-  }
+  },
+  "rs_mongo_collection": "rs_questions"
 }
