@@ -37,3 +37,22 @@ class RajyaSabhaItem(Item):
     meta = Field()
     english_doc = Field()
     hindi_doc =Field() 
+
+class MemberofParliament(Item):
+    """
+    Data structure to define Member of Parliament information
+    """
+    id = Field()
+    name = Field()
+    constituency = Field()
+    state = Field()
+    party = Field()
+    dob = Field()
+    birth_place = Field()
+    marital_status = Field()
+    education = Field()
+    profession = Field()
+    sons = Field()
+    daughters = Field()
+    url = Field()
+    photo = Field()

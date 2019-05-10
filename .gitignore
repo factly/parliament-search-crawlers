@@ -1,3 +1,5 @@
 venv
 Parliament/parliament/config.json
-.idea
+*.idea
+*.ipynb_checkpoints
+*.vscode
