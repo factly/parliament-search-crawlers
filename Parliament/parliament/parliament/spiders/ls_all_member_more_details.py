@@ -11,16 +11,24 @@ class LsAllMemberMoreDetailsSpider(scrapy.Spider):
     name = 'ls_all_member_more_details'
     config_file = open("config.json")
     config = json.load(config_file)
-    print(config["mongo_server"])
     client = pymongo.MongoClient(config["mongo_server"])
     db = client["factly_parliament_search"]
     collection = db["ls_all_member_urls"]
-    compatible_members = collection.find({"Session":"13"})
 
     def start_requests(self):
-        print("Results:",self.compatible_members.count())
-        for member in self.compatible_members:
+        print("Starting")
+        compatible_members = self.collection.find({
+            '$or': [
+                {'Sessions': '13'}, 
+                {'Sessions': '14'}, 
+                {'Sessions': '15'}, 
+                {'Sessions': '16'}
+                ]
+                })
+        print("Results:",compatible_members.count())
+        for member in compatible_members:
             url = member["URL"]
+            print(url)
             yield scrapy.Request(url = url, callback=self.parse_profile, meta={"ID":member["ID"]})
 
 
