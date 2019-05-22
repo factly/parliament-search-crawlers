@@ -56,3 +56,8 @@ class MemberofParliament(Item):
     daughters = Field()
     url = Field()
     photo = Field()
+
+class ImageItem(Item):
+    image_name = Field()
+    image_urls = Field()
+    images = Field()
