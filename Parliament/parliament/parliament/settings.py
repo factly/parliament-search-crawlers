@@ -13,6 +13,8 @@ BOT_NAME = 'parliament'
 
 SPIDER_MODULES = ['parliament.spiders']
 NEWSPIDER_MODULE = 'parliament.spiders'
+DUPEFILTER_CLASS = 'scrapy.dupefilters.BaseDupeFilter'
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
