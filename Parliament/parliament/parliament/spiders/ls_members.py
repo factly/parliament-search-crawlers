@@ -6,6 +6,7 @@
 
 import scrapy
 from parliament.items import MemberofParliament
+from parliament.items import ImageItem
 import pandas as pd
 
 class MPListSpider(scrapy.Spider):
@@ -15,6 +16,8 @@ class MPListSpider(scrapy.Spider):
 
     name = "list_of_mps"
     df = pd.DataFrame()
+    custom_settings = {"ITEM_PIPELINES": {
+        'parliament.pipelines.CustomImageNamePipeline': 1}, "IMAGES_STORE": "Images"}
 
     def start_requests(self):
         urls = [
@@ -29,13 +32,17 @@ class MPListSpider(scrapy.Spider):
         for mp in mp_list:
             entry = mp.xpath('.//text()').extract()
 
-            mp = MemberofParliament()
+            # mp = MemberofParliament()
+            mp = {}
             mp['mp_id'] = entry[1].strip()
             mp['mp_name'] = entry[6].strip()
             mp['mp_party'] = entry[9].strip()
             mp['mp_constituency'] = entry[11].strip()
             self.df = self.df.append(dict(mp), ignore_index=True)
-        self.df.to_excel("members.xlsx")
+            image_url = response.css("#ContentPlaceHolder1_Image1::attr(src)").extract_first()
+            print(image_url)
+            yield ImageItem(image_urls=[image_url], image_name=image_url.split("/")[-1].strip(".jpg"))
+        self.df.to_excel("members_17.xlsx")
             # print(mp['mp_id'], '\t', mp['mp_name'], '\t', mp['mp_party'], '\t', mp['mp_constituency'])
 
 

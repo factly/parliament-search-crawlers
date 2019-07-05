@@ -42,8 +42,9 @@ class MemberofParliament(Item):
     """
     Data structure to define Member of Parliament information
     """
-    id = Field()
+    _id = Field()
     name = Field()
+    session = Field()
     constituency = Field()
     state = Field()
     party = Field()

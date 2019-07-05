@@ -4,6 +4,7 @@ import pandas as pd
 import re
 import time
 from parliament.items import MemberofParliament
+from parliament.items import ImageItem
 import json
 import pymongo
 
@@ -13,12 +14,14 @@ class LsMembersDetailsSpider(scrapy.Spider):
     start_urls = ['http://164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
     config_file = open("config.json")
     config = json.load(config_file)
-    client = pymongo.MongoClient(config["mongo_server"])
+    client = pymongo.MongoClient("mongodb://root:ZJMNF5I4YMKO@35.200.213.251:27017/admin")#config["mongo_server"])
     db = client["factly_parliament_search"]
-    collection = db["members_ls_site"]
-    custom_settings = {"ITEM_PIPELINES": 
-    { 'parliament.pipelines.MembersPipeline': 500}
-    }
+    collection = db["current_ls_members"]
+    custom_settings = {"ITEM_PIPELINES": {
+        'parliament.pipelines.CustomImageNamePipeline': 1}, "IMAGES_STORE": "Images"}
+    # custom_settings = {"ITEM_PIPELINES": 
+    # { 'parliament.pipelines.MembersPipeline': 500}
+    # }
     def __init__(self):
         self.members = []
         # self.data = pd.DataFrame(columns=["ID",
@@ -39,11 +42,11 @@ class LsMembersDetailsSpider(scrapy.Spider):
 
         """Extract List Of All URLs"""
         # mp_id_list = [20, 4903, 4422, 4850, 4773, 4436, 4462, 4442, 4687, 4566, 3394, 4640, 4890, 4805, 4475, 4816, 4800, 4559, 4893, 4688, 4614, 4698, 4814, 4910, 4089, 4938, 4111, 4943, 4936, 4460, 394, 4707, 4851, 4907, 4930, 4738, 4904, 4920]
-        mp_id_list = [4821, 4762, 4895, 7, 519, 4483, 4497, 291, 4593, 4599, 4594, 2692, 4631, 10, 4501, 4897, 4819, 2660, 3439, 4811, 4801, 4163, 197]
-        # mp_url_list = response.css("tr.odd > td > a ::attr(href)").extract()
-        for i in range(len(mp_id_list)):
-            # url = "http://164.100.47.194/Loksabha/Members/"+mp_url_list[i]
-            url = "http://164.100.47.194/Loksabha/Members/MemberBioprofile.aspx?mpsno="+str(mp_id_list[i])
+        # mp_id_list = [4821, 4762, 4895, 7, 519, 4483, 4497, 291, 4593, 4599, 4594, 2692, 4631, 10, 4501, 4897, 4819, 2660, 3439, 4811, 4801, 4163, 197]
+        mp_url_list = response.css("tr.odd > td > a ::attr(href)").extract()
+        for i in range(len(mp_url_list)):
+            url = "http://164.100.47.194/Loksabha/Members/"+mp_url_list[i]
+            # url = "http://164.100.47.194/Loksabha/Members/MemberBioprofile.aspx?mpsno="+str(mp_id_list[i])
             yield scrapy.Request(url=url, callback=self.parse_profile)
             # self.member_urls.append("http://164.100.47.194/Loksabha/Members/"+mp_url_list[i])
         # self.data["ID"] = mp_ids
@@ -60,8 +63,8 @@ class LsMembersDetailsSpider(scrapy.Spider):
 
         item = MemberofParliament()
         url = response.url
-        item["id"] = url.split('=')[1]
-        print("ID: ",item["id"])
+        item["_id"] = url.split('=')[1]
+        print("ID: ",item["_id"])
 
         item["name"] = response.css("td.gridheader1::text").extract()[0].strip()
         first_table = [_.strip() for _ in response.css("table#ContentPlaceHolder1_Datagrid1").css("td.griditem2::text").extract()]
@@ -70,6 +73,7 @@ class LsMembersDetailsSpider(scrapy.Spider):
         state = re.findall("\(.*\)",constituency)[0].strip('()')
         constituency = constituency.replace(re.findall("\(.*\)",constituency)[0],"").strip()
         item["constituency"] = constituency
+        item["session"] = [17]
         item["state"] = state.split('(')[-1]
 
         party = first_table[1]
@@ -96,7 +100,11 @@ class LsMembersDetailsSpider(scrapy.Spider):
                 item["education"] = value
             elif heading == 'Profession':
                 item["profession"] = value
-        yield item
+        # yield item
+        self.collection.insert_one(dict(item))
+        image_url = response.css("#ContentPlaceHolder1_Image1::attr(src)").extract_first()
+        print(image_url)
+        yield ImageItem(image_urls=[image_url], image_name=image_url.split("/")[-1].strip(".jpg"))
         # self.members.append(dict(item))
         
     # def fetch_details_page(self,index=0):
