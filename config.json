@@ -1,9 +1,0 @@
-{
-  "mongo_server": "mongodb+srv://database-manager:s96kzwNljaYqg1Eb@cluster0-r4rsa.mongodb.net/test?retryWrites=true",
-  "mongo_database": "factly_parliament_search",
-  "mongo_collection": {
-    "current": "ls_questions",
-    "old": "ls_old_questions"
-  },
-  "rs_mongo_collection": "rs_questions"
-}

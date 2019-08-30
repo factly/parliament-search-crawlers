@@ -1,0 +1,4 @@
+config.cfg
+venv
+.vscode
+.ipynb_checkpoints
