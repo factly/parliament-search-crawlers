@@ -4,7 +4,7 @@ import scrapy
 from bs4 import BeautifulSoup
 import requests
 from scrapy.http import HtmlResponse, Request
-import datetime
+from datetime import datetime
 import json
 import re
 import pymongo
@@ -19,18 +19,28 @@ class LsQuestionsSpider(scrapy.Spider):
     client = pymongo.MongoClient(config["mongodb_uri"])
     db = client[config["database"]]
     collection = db["lok_sabha_current_questions"]
-    name = 'ls_current_questions'
+    name = 'ls_current_questions_crawler'
     start_urls = ['http://loksabhaph.nic.in/Questions/Qtextsearch.aspx']
     meta = {}
     page_flag = False
+    detected = open("logs/detected_"+datetime.now().strftime("%Y%m%d%H%M%S")+".log","w+")
+    skipped = open("logs/skipped_"+datetime.now().strftime("%Y%m%d%H%M%S") +".log","w+")
+    written = open("logs/written_"+datetime.now().strftime("%Y%m%d%H%M%S") +".log","w+")
+    errors = open("logs/errors_"+datetime.now().strftime("%Y%m%d%H%M%S") +".log","w+")
 
     # Use the following two lines to run the crawler from a specific page
     current_page = 1
     meta["current_page"] = current_page
     page_flag = True
 
+    # def __init__(self):
+    #     super().__init__(**kwargs)
+
     # This will act as the entry point of the spider
+    #scrapy crawl ls_current_questions_crawler -a from_date=26.07.2019 -a to_date=26.07.2019
     def parse(self, response):
+        # from_date = datetime.strptime(self.from_date, '%d.%m.%Y')
+        # to_date = datetime.strptime(self.to_date, '%d.%m.%Y')
         if response.status == 404:
             yield scrapy.Request(response.request.url)
         else:
@@ -69,30 +79,38 @@ class LsQuestionsSpider(scrapy.Spider):
             questions = response.css('table.member_list_table > tr')
             for question in questions:
                 # Writing details of each question to a ParliamentItem object (see items.py for more details)
-                item = {}
-                item['lsno'] = 17
-                item['link'] = "http://loksabhaph.nic.in/Questions/" + question.css("td[style*='width: 30%'] a::attr(href)").extract()[0]
-                item['qref'] = re.search("qref=[0-9]+",item['link']).group().split("=")[1]
-                if self.collection.find({"qref": item["qref"]}).count() > 0:
-                    continue
-                self.meta["fetched_on"] = str(datetime.datetime.now())
-                item['question_number'] = question.css("td[style*='width: 5%'] a::text").extract_first()
-                item['question_type'] = question.css("td[style*='width: 7%'] a::text")[0].extract().strip()
-                item['english_pdf'] = question.css("td[style*='width: 7%'] a[href*='pdf']::attr(href)").extract_first()
-                if question.css("td[style*='width: 7%'] a[href*='hindi']::attr(href)").extract_first():
-                    item['hindi_pdf'] = question.css("td[style*='width: 7%'] a[href*='hindi']::attr(href)").extract_first()
-                else:
-                    item['hindi_pdf'] = ""
-                item['date'] = question.css("td[style*='width: 7%']")[1].css("a::text").extract_first()
-                item['ministry'] = question.css("td[style*='width: 20%']")[0].css("a::text").extract_first()
-                item['members'] = question.css("td[style*='width: 20%']")[1].css("a::text").extract()
-                item['subject'] = question.css("td[style*='width: 30%'] a::text").extract_first()
-                item['meta'] = self.meta
-                # print(item)
-                # item = self.parse_question(item)
-                # self.data.append(dict(item))
-                # json.dump(self.data,open("questions.json","w"))
-                yield Request(url=item['link'], meta={"item":item}, callback=self.parse_question)
+                question_date = question.css("td[style*='width: 7%']")[1].css("a::text").extract_first()
+                question_date = datetime.strptime(question_date, '%d.%m.%Y')
+                # if question_date < from_date:
+                #     break
+                # if question_date <= to_date:
+                if True:
+                    item = {}
+                    item['lsno'] = 17
+                    item['link'] = "http://loksabhaph.nic.in/Questions/" + question.css("td[style*='width: 30%'] a::attr(href)").extract()[0]
+                    item['qref'] = re.search("qref=[0-9]+",item['link']).group().split("=")[1]
+                    self.detected.write(item['link']+"\n")
+                    if self.collection.find({"qref": item["qref"]}).count() > 0:
+                        self.skipped.write(item['link']+"\n")
+                        continue
+                    self.meta["fetched_on"] = str(datetime.now())
+                    item['question_number'] = question.css("td[style*='width: 5%'] a::text").extract_first()
+                    item['question_type'] = question.css("td[style*='width: 7%'] a::text")[0].extract().strip()
+                    item['english_pdf'] = question.css("td[style*='width: 7%'] a[href*='pdf']::attr(href)").extract_first()
+                    if question.css("td[style*='width: 7%'] a[href*='hindi']::attr(href)").extract_first():
+                        item['hindi_pdf'] = question.css("td[style*='width: 7%'] a[href*='hindi']::attr(href)").extract_first()
+                    else:
+                        item['hindi_pdf'] = ""
+                    item['date'] = question.css("td[style*='width: 7%']")[1].css("a::text").extract_first()
+                    item['ministry'] = question.css("td[style*='width: 20%']")[0].css("a::text").extract_first()
+                    item['members'] = question.css("td[style*='width: 20%']")[1].css("a::text").extract()
+                    item['subject'] = question.css("td[style*='width: 30%'] a::text").extract_first()
+                    item['meta'] = self.meta
+                    # print(item)
+                    # item = self.parse_question(item)
+                    # self.data.append(dict(item))
+                    # json.dump(self.data,open("questions.json","w"))
+                    yield Request(url=item['link'], meta={"item":item}, callback=self.parse_question)
 
             # If this is not the last page go to the next page
             if self.meta["current_page"] < self.meta["total_pages"]:
@@ -112,4 +130,10 @@ class LsQuestionsSpider(scrapy.Spider):
         item["question"] = "\n".join(response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[0].css("::text").extract()).strip()
         item["answer"] = "\n".join(response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[1].css("::text").extract()).strip()
         # print(item)
-        self.collection.insert_one(item)
+        result = self.collection.insert_one(item)
+        ins_flag = False
+        if self.collection.count_documents({"qref":item["qref"]}) == 1:
+            self.written.write(item['link']+"\n")
+            ins_flag = True
+        else:
+            self.errors.write(item['link']+"\n")

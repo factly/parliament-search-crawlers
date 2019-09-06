@@ -3,14 +3,16 @@ import scrapy
 from parliament.items import ImageItem
 import pymongo
 import re
+import datetime
 
 class LokSabhaMaster17Spider(scrapy.Spider):
-    name = 'lok_sabha_master_17'
+    name = 'lok_sabha_members_master'
     # allowed_domains = ['164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
     start_urls = ['http://164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
     client = pymongo.MongoClient("mongodb://root:ZJMNF5I4YMKO@35.200.213.251:27017/admin")#config["mongo_server"])
     db = client["factly_parliament_search"]
     collection = db["current_ls_members"]
+    custom_settings = {"ITEM_PIPELINES": {'parliament.pipelines.CustomImageNamePipeline': 1},"IMAGES_STORE":"Images/17"}
     
     def parse(self,response):
         mp_url_list = response.css("tr.odd > td > a ::attr(href)").extract()[1::2]
@@ -20,7 +22,6 @@ class LokSabhaMaster17Spider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse_profile)
 
     def parse_profile(self,response):
-
         item = {}
         url = response.url
         item["_id"] = url.split('=')[1]
@@ -37,7 +38,10 @@ class LokSabhaMaster17Spider(scrapy.Spider):
         item["state"] = state.split('(')[-1]
         party = first_table[1]
         item["party"] = party
-        item["email"] = first_table[2:]
+        item["email"] = []
+        for _ in first_table[2:]:
+            if _ != "":
+                item["email"].append(_)
 
         second_table_headings = response.css("table[cellspacing='5'] > tr > td.darkerb")
         second_table_values = response.css("table[cellspacing='5'] > tr > td.griditem2")
@@ -60,6 +64,17 @@ class LokSabhaMaster17Spider(scrapy.Spider):
                 item["education"] = value
             elif heading == 'Profession':
                 item["profession"] = value
-        self.collection.insert_one(dict(item))
+            elif heading == 'Permanent Address':
+                item["phone"] = re.findall("[0-9]{11}|[0-9]{10}", value)
+        previous_record = self.collection.find_one({"_id" : item['_id']})
+        item["meta"] = {}
+        item["meta"]["fetched_on"] = datetime.datetime.now()
+        
+        if previous_record == None:
+            self.collection.insert_one(dict(item))
+        else:
+            item["meta"]["old_record"] = previous_record
+            item["meta"]["old_record"]["old_record"] = ""
+            self.collection.update_one({"_id" : item["_id"]},{"$set":item})
         image_url = response.css("#ContentPlaceHolder1_Image1::attr(src)").extract_first()
         yield ImageItem(image_urls=[image_url], image_name=image_url.split("/")[-1].strip(".jpg"))
