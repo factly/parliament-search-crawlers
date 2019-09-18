@@ -9,10 +9,10 @@ import re
 class LsAllMembersSpider(scrapy.Spider):
     name = 'ls_all_members'
     # allowed_domains = ['loksabhaph.nic.in/Members/lokprev.aspx']
-    # start_urls = ['http://loksabhaph.nic.in/Members/lokprev.aspx/']
-    start_urls = ["file:///C:/Users/ishsx/Documents/GitHub/parliament-search-crawlers/Resources/Members%20_%20Lok%20Sabha.html"]
+    start_urls = ['http://loksabhaph.nic.in/Members/lokprev.aspx']
+    # start_urls = ["file:///C:/Users/ishsx/Documents/GitHub/parliament-search-crawlers/Resources/Members%20_%20Lok%20Sabha.html"]
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    current_letter = 1
+    current_letter = 0
     # start_urls[0] = start_urls[0]+"?search="+letters[current_letter]
     config_file = open("config.cfg")
     config = json.load(config_file)
@@ -20,39 +20,35 @@ class LsAllMembersSpider(scrapy.Spider):
     db = client["factly_parliament_search"]
     collection = db["ls_all_member_urls"]
 
-    # def __init__(self):
-    #     for letter in self.letters:
-    #         url = self.start_urls+letter+".html"
-    #         yield scrapy.Request(url=url,callback=self.parse_member_list)
-
     def parse(self, response):
-    #     form_data = {
-    #         "__EVENTTARGET": "ctl00$ContentPlaceHolder1$drdpages",
-    #         "__EVENTARGUMENT": "",
-    #         "__LASTFOCUS": "",
-    #         "__VIEWSTATE": response.css('input#__VIEWSTATE::attr(value)').extract_first(),
-    #         "__VIEWSTATEGENERATOR": response.css('input#__VIEWSTATEGENERATOR::attr(value)').extract_first(),
-    #         "__VIEWSTATEENCRYPTED": "",
-    #         "__EVENTVALIDATION": response.css('input#__EVENTVALIDATION::attr(value)').extract_first(),
-    #         "ctl00$txtSearchGlobal": "", 
-    #         "ctl00$ContentPlaceHolder1$txtSearch": "",
-    #         "ctl00$ContentPlaceHolder1$member": "rdbtnName",
-    #         "ctl00$ContentPlaceHolder1$ddlfile": ".pdf",
-    #         "ctl00$ContentPlaceHolder1$ddlstate": "--Select State--",
-    #         "ctl00$ContentPlaceHolder1$ddlparty": "--Select Party--",
-    #         "ctl00$ContentPlaceHolder1$txtPageNo": "",
-    #         "ctl00$ContentPlaceHolder1$drdpages": "5000",
-    #         "ctl00$ContentPlaceHolder1$hidTableCount": ""
-    #         }
-    #     open_in_browser(response)
-        for letter in self.letters:
-            url = self.start_urls[0].replace(".html","_"+letter+".html")
-            yield scrapy.Request(url=url,callback=self.parse_member_list)
+        open_in_browser(response)
+        for i in range(3):
+            current_url = self.start_urls[0]+'?search='+self.letters[i]
+            yield scrapy.Request(url=current_url, callback=self.full_page)
     # def parse(self, response):
 
-    
+    def full_page(self,response):
+        form_data = {
+            "__EVENTARGUMENT" : "",
+            "__EVENTTARGET" : "ctl00$ContentPlaceHolder1$drdpages",
+            "__EVENTVALIDATION" : response.css('input#__EVENTVALIDATION::attr(value)').extract_first(),
+            "__LASTFOCUS" : "",
+            "__VIEWSTATE" : response.css('input#__VIEWSTATE::attr(value)').extract_first(),
+            "__VIEWSTATEENCRYPTED" : "",
+            "__VIEWSTATEGENERATOR" : "489EEF68",
+            "ctl00$ContentPlaceHolder1$ddlfile" : ".pdf",
+            "ctl00$ContentPlaceHolder1$drdpages" : "5000",
+            "ctl00$ContentPlaceHolder1$hidTableCount" : "",
+            "ctl00$ContentPlaceHolder1$member" : "rdbtnName",
+            "ctl00$ContentPlaceHolder1$txtPageNo" : "",
+            "ctl00$ContentPlaceHolder1$txtSearch" : "",
+            "ctl00$txtSearchGlobal" : ""
+        }
+        yield scrapy.FormRequest(url = response.url, formdata=form_data, callback=self.parse_member_list)
+
     def parse_member_list(self, response):
-        # open_in_browser(response)
+        open_in_browser(response)
+        return
         list_of_members = response.css("tr.odd")
         for member in list_of_members:
             member_data = {}

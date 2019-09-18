@@ -74,7 +74,7 @@ class LokSabhaMaster17Spider(scrapy.Spider):
             self.collection.insert_one(dict(item))
         else:
             item["meta"]["old_record"] = previous_record
-            item["meta"]["old_record"]["old_record"] = ""
+            item["meta"]["old_record"]["meta"]["old_record"] = ""
             self.collection.update_one({"_id" : item["_id"]},{"$set":item})
         image_url = response.css("#ContentPlaceHolder1_Image1::attr(src)").extract_first()
         yield ImageItem(image_urls=[image_url], image_name=image_url.split("/")[-1].strip(".jpg"))
