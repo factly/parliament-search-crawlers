@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
 # from parliament.items import ParliamentItem
-from bs4 import BeautifulSoup
 import requests
 from scrapy.http import HtmlResponse, Request
 import datetime
@@ -118,8 +117,7 @@ class LsQuestionsSpider(scrapy.Spider):
     # Fetch the question from the link and persist to MongoDB
     def parse_question(self, response):
         item = response.meta["item"]
-        item["text"] = BeautifulSoup(response.css("table[style='margin-top: -15px;']").extract_first(),
-            features="lxml").text.strip()
+        item["text"] = response.css("table[style='margin-top: -15px;']").extract_first()
         item["question"] = "\n".join(response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[0].css("::text").extract()).strip()
         item["answer"] = "\n".join(response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[1].css("::text").extract()).strip()
         # print(item)

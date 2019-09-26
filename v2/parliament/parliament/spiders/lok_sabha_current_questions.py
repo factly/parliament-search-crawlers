@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
 # from parliament.items import ParliamentItem
-from bs4 import BeautifulSoup
 import requests
 from scrapy.http import HtmlResponse, Request
 from datetime import datetime
@@ -18,7 +17,7 @@ class LsQuestionsSpider(scrapy.Spider):
     config = json.load(config_file)
     client = pymongo.MongoClient(config["mongodb_uri"])
     db = client[config["database"]]
-    collection = db["lok_sabha_current_questions"]
+    collection = db["lok_sabha_current_questions_html"]
     name = 'ls_current_questions_crawler'
     start_urls = ['http://loksabhaph.nic.in/Questions/Qtextsearch.aspx']
     meta = {}
@@ -130,7 +129,6 @@ class LsQuestionsSpider(scrapy.Spider):
         item["answer"] = "\n".join(response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[1].css("::text").extract()).strip()
         # print(item)
         result = self.collection.insert_one(item)
-        ins_flag = False
         if self.collection.count_documents({"qref":item["qref"]}) == 1:
             self.written.write(item['link']+"\n")
             ins_flag = True
