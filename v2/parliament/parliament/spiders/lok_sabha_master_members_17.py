@@ -33,11 +33,11 @@ class LokSabhaMaster17Spider(scrapy.Spider):
         constituency = first_table[0]
         state = re.findall("\(.*\)",constituency)[0].strip('()')
         constituency = constituency.replace(re.findall("\(.*\)",constituency)[0],"").strip()
-        item["constituency"] = constituency
+        item["constituency_id"] = constituency
         item["session"] = [17]
         item["state"] = state.split('(')[-1]
         party = first_table[1]
-        item["party"] = party
+        item["party_id"] = party
         item["email"] = []
         for _ in first_table[2:]:
             if _ != "":
