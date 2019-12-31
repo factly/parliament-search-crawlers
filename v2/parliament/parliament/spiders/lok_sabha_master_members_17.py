@@ -7,9 +7,10 @@ import datetime
 
 class LokSabhaMaster17Spider(scrapy.Spider):
     name = 'lok_sabha_members_master'
-    # allowed_domains = ['164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
     start_urls = ['http://164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
-    client = pymongo.MongoClient("mongodb://root:ZJMNF5I4YMKO@35.200.213.251:27017/admin")#config["mongo_server"])
+    config_file = open("config.cfg")
+    config = json.load(config_file)
+    client = config["mongo_server"])
     db = client["factly_parliament_search"]
     collection = db["current_ls_members"]
     custom_settings = {"ITEM_PIPELINES": {'parliament.pipelines.CustomImageNamePipeline': 1},"IMAGES_STORE":"Images/17"}
@@ -33,14 +34,17 @@ class LokSabhaMaster17Spider(scrapy.Spider):
         constituency = first_table[0]
         state = re.findall("\(.*\)",constituency)[0].strip('()')
         constituency = constituency.replace(re.findall("\(.*\)",constituency)[0],"").strip()
-        item["constituency"] = constituency
+        item["geography"] = constituency
         item["state"] = state.split('(')[-1]
         party = first_table[1]
         item["party"] = party
         item["terms"] = [{
             "party" : party,
-            "constituency" : constituency,
-            "session" : 17
+            "geography" : constituency,
+            "session" : "17",
+            "house" : "1",
+            "from" : "2019",
+            "to" : "2024"
         }]
         item["email"] = []
         for _ in first_table[2:]:

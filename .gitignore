@@ -4,3 +4,5 @@ Parliament/parliament/config.json
 *.ipynb_checkpoints
 *.vscode
 /v3
+*.pyc
+*.log
