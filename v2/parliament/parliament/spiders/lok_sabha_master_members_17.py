@@ -4,6 +4,7 @@ from parliament.items import ImageItem
 import pymongo
 import re
 import datetime
+import json
 
 class LokSabhaMaster17Spider(scrapy.Spider):
     name = 'lok_sabha_members_master'
