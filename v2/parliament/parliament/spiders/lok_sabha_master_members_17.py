@@ -11,7 +11,7 @@ class LokSabhaMaster17Spider(scrapy.Spider):
     start_urls = ['http://164.100.47.194/Loksabha/Members/AlphabeticalList.aspx']
     config_file = open("config.cfg")
     config = json.load(config_file)
-    client = config["mongo_server"]
+    client = pymongo.MongoClient(config["mongodb_uri"])
     db = client["factly_parliament_search"]
     collection = db["current_ls_members"]
     custom_settings = {"ITEM_PIPELINES": {'parliament.pipelines.CustomImageNamePipeline': 1},"IMAGES_STORE":"Images/17"}
