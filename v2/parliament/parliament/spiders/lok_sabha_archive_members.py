@@ -11,7 +11,7 @@ class LsArchiveMembersSpider(scrapy.Spider):
     config = json.load(config_file)
     client = pymongo.MongoClient(config["mongodb_uri"])
     db = client["factly_parliament_search"]
-    collection = db["archive_ls_members_test"]
+    collection = db["archive_ls_members"]
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     current_letter = 0
 
