@@ -11,7 +11,8 @@ class LsArchiveMembersSpider(scrapy.Spider):
     config = json.load(config_file)
     client = pymongo.MongoClient(config["mongodb_uri"])
     db = client["factly_parliament_search"]
-    collection = db["archive_ls_members"]
+    collection = db["archive_ls_members_test"]
+    reference_collection = db["archive_ls_members"]
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     current_letter = 0
 
@@ -44,16 +45,16 @@ class LsArchiveMembersSpider(scrapy.Spider):
         list_of_members = response.css("tr.odd")
         for member in list_of_members:
             member_data = {}
-            member_data["Name"] = member.css("td ::text")[2].extract().strip()
-            member_data["Party"] = member.css("td ::text")[4].extract().strip()
+            member_data["name"] = member.css("td ::text")[2].extract().strip()
+            member_data["party"] = member.css("td ::text")[4].extract().strip()
             try:
-                member_data["Constituency"] = member.css("td ::text")[5].extract().strip().split("(")[0].strip()
+                member_data["constituency"] = member.css("td ::text")[5].extract().strip().split("(")[0].strip()
             except:
-                member_data["Constituency"] = "Nominated"
+                member_data["constituency"] = "Nominated"
             try:
-                member_data["State"] = member.css("td ::text")[5].extract().strip().split("(")[-1].strip(")")
+                member_data["state"] = member.css("td ::text")[5].extract().strip().split("(")[-1].strip(")")
             except:
-                member_data["State"] = "Not Available"
+                member_data["state"] = "Not Available"
             sessions = member.css("td ::text")[6].extract().strip().split(',')
             member_data["terms"] = []
             for session in sessions:
@@ -66,20 +67,32 @@ class LsArchiveMembersSpider(scrapy.Spider):
                     "to" : ""
                     }
                 member_data["terms"].append(session_details)
-            member_data["URL"] = member.css("td > a ::attr(href)").extract()[0]
-            member_data["ID"] = member_data["URL"].split("mpsno=")[1].split("&")[0]
-            if member_data["URL"].find("http") == -1:
-                member_data["URL"] = "http://loksabhaph.nic.in/Members/"+member_data["URL"]
-            check_existence = self.collection.find({"ID":member_data["ID"]})
+            member_data["url"] = member.css("td > a ::attr(href)").extract()[0]
+            member_data["MID"] = member_data["url"].split("mpsno=")[1].split("&")[0]
+            if member_data["url"].find("http") == -1:
+                member_data["url"] = "http://loksabhaph.nic.in/Members/"+member_data["url"]
+            check_existence = self.collection.find({"MID":member_data["MID"]})
             print(member_data)
             if check_existence.count() > 0:
                 continue
             else:
                 self.collection.insert_one(member_data)
-                yield scrapy.Request(url = member_data["URL"], callback=self.parse_profile, meta={"ID":member_data["ID"]})
+                if self.reference_collection.count_documents({"_id":member_data["MID"]}) == 1:
+                    reference_document = self.reference_collection.find_one({"_id":member_data["MID"]})
+                    member_data["dob"] = reference_document["dob"]
+                    member_data["birth_place"] = reference_document["birth_place"]
+                    member_data["marital_status"] = reference_document["marital_status"]
+                    member_data["sons"] = reference_document["sons"]
+                    member_data["daughters"] = reference_document["daughters"]
+                    member_data["education"] = reference_document["education"]
+                    member_data["profession"] = reference_document["profession"]
+                    self.collection.update_one({"MID":member_data["MID"]},{"$set":member_data})
+                else:
+                    yield scrapy.Request(url = member_data["url"], callback=self.parse_profile, meta={"MID":member_data["MID"]})
 
     def parse_profile(self,response):
-        member_id = response.request.meta["ID"]
+        open_in_browser(response)
+        member_id = response.request.meta["MID"]
         member_details = {}
         first_table = [_.strip() for _ in response.css("table#ContentPlaceHolder1_Datagrid1").css("td.griditem2::text").extract()]
         second_table_headings = response.css("table[cellspacing='5'] > tr > td.darkerb")
@@ -90,18 +103,18 @@ class LsArchiveMembersSpider(scrapy.Spider):
             value = ' '.join([_.strip() for _ in second_table_values[i].css('::text').extract()])
             
             if heading == 'Date of Birth':
-                member_details["DOB"] = value
+                member_details["dob"] = value
             elif heading == 'Place of Birth':
-                member_details["Birth_place"] = value
+                member_details["birth_place"] = value
             elif heading == 'Marital Status':
-                member_details["Marital_status"] = value
+                member_details["marital_status"] = value
             elif heading == 'No. of Sons':
-                member_details["Sons"] = value
+                member_details["sons"] = value
             elif heading == 'No.of Daughters':
-                member_details["Daughters"] = value
+                member_details["daughters"] = value
             elif heading == 'Educational Qualifications':
-                member_details["Education"] = value
+                member_details["education"] = value
             elif heading == 'Profession':
-                member_details["Profession"] = value
+                member_details["profession"] = value
         self.collection.update_one({"ID":member_id},{"$set":member_details})
   
