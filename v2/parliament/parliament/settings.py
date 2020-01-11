@@ -62,11 +62,14 @@ TELNETCONSOLE_ENABLED = False
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
-# Configure item pipelines
+# Configure item pipelinesIM
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+ITEM_PIPELINES = {
+    'scrapy.pipelines.images.ImagesPipeline':1
 #    'parliament.pipelines.ParliamentPipeline': 300,
-#}
+}
+
+IMAGE_STORE = '/images'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
