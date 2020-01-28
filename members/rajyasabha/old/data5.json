@@ -1,0 +1,282 @@
+[
+    {
+        "name": "Ahluwalia Shri S.S.",
+        "term": [
+            {
+                "state": "Jharkhand",
+                "party": "BJP",
+                "from": "2006-4-3",
+                "to": "2012-4-2"
+            },
+            {
+                "state": "Jharkhand",
+                "party": "BJP",
+                "from": "2000-11-15",
+                "to": "2006-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "BJP",
+                "from": "2000-4-3",
+                "to": "2000-11-14"
+            },
+            {
+                "state": "Bihar",
+                "party": "CONG(I)",
+                "from": "1992-7-8",
+                "to": "1998-7-7"
+            },
+            {
+                "state": "Bihar",
+                "party": "CONG(I)",
+                "from": "1986-7-7",
+                "to": "1992-7-6"
+            }
+        ]
+    },
+    {
+        "name": "Bhardwaj Shri Hans Raj",
+        "term": [
+            {
+                "state": "Haryana",
+                "party": "INC",
+                "from": "2006-4-3",
+                "to": "2009-6-29"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "INC",
+                "from": "2000-4-3",
+                "to": "2006-4-2"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1994-4-3",
+                "to": "2000-4-2"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1988-4-3",
+                "to": "1994-4-2"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Gupta Shri Bhupesh",
+        "term": [
+            {
+                "state": "West Bengal",
+                "party": "CPI",
+                "from": "1976-4-3",
+                "to": "1981-8-6"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CPI",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CPI",
+                "from": "1964-4-3",
+                "to": "1970-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CPI",
+                "from": "1958-4-3",
+                "to": "1964-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CPI",
+                "from": "1952-4-3",
+                "to": "1958-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Kesri Shri Sitaram",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "INC",
+                "from": "1994-4-3",
+                "to": "2000-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "INC",
+                "from": "1988-4-3",
+                "to": "1994-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "INC",
+                "from": "1980-7-7",
+                "to": "1986-7-6"
+            },
+            {
+                "state": "Bihar",
+                "party": "INC",
+                "from": "1974-4-3",
+                "to": "1980-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "INC",
+                "from": "1971-7-2",
+                "to": "1974-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Khaparde Miss Saroj",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1994-4-3",
+                "to": "2000-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1988-4-3",
+                "to": "1994-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1976-4-3",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1972-4-3",
+                "to": "1974-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Koya Shri B.V. Abdulla",
+        "term": [
+            {
+                "state": "Kerala",
+                "party": "ML",
+                "from": "1992-4-3",
+                "to": "1998-4-2"
+            },
+            {
+                "state": "Kerala",
+                "party": "ML",
+                "from": "1986-4-3",
+                "to": "1992-4-2"
+            },
+            {
+                "state": "Kerala",
+                "party": "ML",
+                "from": "1980-4-3",
+                "to": "1986-4-2"
+            },
+            {
+                "state": "Kerala",
+                "party": "ML",
+                "from": "1974-4-3",
+                "to": "1980-4-2"
+            },
+            {
+                "state": "Kerala",
+                "party": "ML",
+                "from": "1967-4-15",
+                "to": "1973-4-14"
+            }
+        ]
+    },
+    {
+        "name": "Mukherjee Shri Pranab",
+        "term": [
+            {
+                "state": "West Bengal",
+                "party": "INC",
+                "from": "1999-8-19",
+                "to": "2004-5-13"
+            },
+            {
+                "state": "West Bengal",
+                "party": "INC",
+                "from": "1993-8-19",
+                "to": "1999-8-18"
+            },
+            {
+                "state": "Gujarat",
+                "party": "CONG(I)",
+                "from": "1981-8-14",
+                "to": "1987-8-13"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CONG(I)",
+                "from": "1975-7-10",
+                "to": "1981-7-9"
+            },
+            {
+                "state": "West Bengal",
+                "party": "CONG(I)",
+                "from": "1969-7-10",
+                "to": "1975-7-9"
+            }
+        ]
+    },
+    {
+        "name": "Tohra Sardar Gurcharan Singh",
+        "term": [
+            {
+                "state": "Punjab",
+                "party": "SAD",
+                "from": "1998-4-10",
+                "to": "2004-4-1"
+            },
+            {
+                "state": "Punjab",
+                "party": "SAD",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            },
+            {
+                "state": "Punjab",
+                "party": "SAD",
+                "from": "1980-5-9",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "Punjab",
+                "party": "SAD",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "Punjab",
+                "party": "SAD",
+                "from": "1969-3-28",
+                "to": "1970-4-2"
+            }
+        ]
+    }
+]

@@ -1,0 +1,84 @@
+[
+    {
+        "name": "Heptulla Dr. Najma A.",
+        "term": [
+            {
+                "state": "Madhya Pradesh",
+                "party": "BJP",
+                "from": "2012-4-3",
+                "to": "2016-8-20"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "2004-7-5",
+                "to": "2010-7-4"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1998-7-5",
+                "to": "2004-6-10"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1992-7-5",
+                "to": "1998-7-4"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1986-7-5",
+                "to": "1992-7-4"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1980-7-5",
+                "to": "1986-7-4"
+            }
+        ]
+    },
+    {
+        "name": "Jethmalani Shri Ram",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "RJD",
+                "from": "2016-7-8",
+                "to": "2019-9-8"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "IND.",
+                "from": "2010-7-5",
+                "to": "2016-6-8"
+            },
+            {
+                "state": "Nominated",
+                "party": "NOM.",
+                "from": "2006-4-10",
+                "to": "2009-8-26"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "IND.",
+                "from": "2000-4-3",
+                "to": "2006-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "IND.",
+                "from": "1994-4-3",
+                "to": "2000-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "JD",
+                "from": "1988-4-3",
+                "to": "1994-4-2"
+            }
+        ]
+    }
+]

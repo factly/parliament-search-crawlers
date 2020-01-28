@@ -1,0 +1,767 @@
+[
+    {
+        "PID": 1,
+        "name": "Aam Aadmi Party",
+        "abbr": "AAP"
+    },
+    {
+        "PID": 2,
+        "name": "AJSU Party",
+        "abbr": "AJSU"
+    },
+    {
+        "PID": 3,
+        "name": "Akali",
+        "abbr": "Akali"
+    },
+    {
+        "PID": 4,
+        "name": "Akali (Sant Group)",
+        "abbr": "Akali (S)"
+    },
+    {
+        "PID": 5,
+        "name": "Akali Dal",
+        "abbr": "AD"
+    },
+    {
+        "PID": 6,
+        "name": "Akhil Bharatiya Lok Tantrik Congress",
+        "abbr": "ABLTC"
+    },
+    {
+        "PID": 7,
+        "name": "All India Anna Dravida Munnetra Kazhagam",
+        "abbr": "AIADMK"
+    },
+    {
+        "PID": 8,
+        "name": "All India Forward Bloc",
+        "abbr": "AIFB"
+    },
+    {
+        "PID": 9,
+        "name": "All India Ganatantra Parishad",
+        "abbr": "AIGP"
+    },
+    {
+        "PID": 10,
+        "name": "All India Indira Congress (Tiwari)",
+        "abbr": "AIIC(T)"
+    },
+    {
+        "PID": 11,
+        "name": "All India Majlis-E-Ittehadul Muslimeen",
+        "abbr": "AIMIM"
+    },
+    {
+        "PID": 12,
+        "name": "All India N.R. Congress",
+        "abbr": "AINRC"
+    },
+    {
+        "PID": 13,
+        "name": "All India Rashtriya Janata Party",
+        "abbr": "RJP"
+    },
+    {
+        "PID": 14,
+        "name": "All India Trinamool Congress",
+        "abbr": "AITC"
+    },
+    {
+        "PID": 15,
+        "name": "All India United Democratic Front",
+        "abbr": "AIUDF"
+    },
+    {
+        "PID": 16,
+        "name": "All Jammu & Kashmir National Conference",
+        "abbr": "AIJKNC"
+    },
+    {
+        "PID": 17,
+        "name": "All Party Hill Leaders' Conference",
+        "abbr": "APHC"
+    },
+    {
+        "PID": 18,
+        "name": "Apna Dal",
+        "abbr": "Apna Dal"
+    },
+    {
+        "PID": 19,
+        "name": "Arunachal Congress",
+        "abbr": "AC"
+    },
+    {
+        "PID": 20,
+        "name": "Asom Gana Parishad",
+        "abbr": "AGP"
+    },
+    {
+        "PID": 21,
+        "name": "Autonomous State Demand Committee",
+        "abbr": "ASDC"
+    },
+    {
+        "PID": 22,
+        "name": "Bahujan Samaj Party",
+        "abbr": "BSP"
+    },
+    {
+        "PID": 23,
+        "name": "Bahujan Vikas Aaghadi",
+        "abbr": "BVA"
+    },
+    {
+        "PID": 24,
+        "name": "Bangla Congress",
+        "abbr": "BC"
+    },
+    {
+        "PID": 25,
+        "name": "Bharatiya Janata Party",
+        "abbr": "BJP"
+    },
+    {
+        "PID": 26,
+        "name": "Bharatiya Kranti Dal",
+        "abbr": "BKD"
+    },
+    {
+        "PID": 27,
+        "name": "Bharatiya Navshakti Party",
+        "abbr": "BNP"
+    },
+    {
+        "PID": 28,
+        "name": "Bharipa Bahujan Mahasangha",
+        "abbr": "BBM"
+    },
+    {
+        "PID": 29,
+        "name": "Biju Janata Dal",
+        "abbr": "BJD"
+    },
+    {
+        "PID": 30,
+        "name": "Bodoland Peoples Front",
+        "abbr": "BPF"
+    },
+    {
+        "PID": 31,
+        "name": "Commonweal Party",
+        "abbr": "CWP"
+    },
+    {
+        "PID": 32,
+        "name": "Communist Party",
+        "abbr": "CPI Old"
+    },
+    {
+        "PID": 34,
+        "name": "Communist Party of India (Marxist-Lennist Liberation)",
+        "abbr": "CPI(ML)"
+    },
+    {
+        "PID": 35,
+        "name": "Communist Party of India (Marxist)",
+        "abbr": "CPM"
+    },
+    {
+        "PID": 36,
+        "name": "Communist Party of India",
+        "abbr": "CPI"
+    },
+    {
+        "PID": 37,
+        "name": "Congress (I)",
+        "abbr": "INC (I)"
+    },
+    {
+        "PID": 38,
+        "name": "Congress",
+        "abbr": "Congress"
+    },
+    {
+        "PID": 39,
+        "name": "Congress (O)",
+        "abbr": "Congress (O)"
+    },
+    {
+        "PID": 40,
+        "name": "Congress (S)",
+        "abbr": "Congress (S)"
+    },
+    {
+        "PID": 41,
+        "name": "Congress (U)",
+        "abbr": "Congress (U)"
+    },
+    {
+        "PID": 42,
+        "name": "Congress Reforms Committee",
+        "abbr": "CRC"
+    },
+    {
+        "PID": 43,
+        "name": "Dravida Munnetra Kazhagam",
+        "abbr": "DMK"
+    },
+    {
+        "PID": 44,
+        "name": "Dravidian Federation of South India",
+        "abbr": "DFSI"
+    },
+    {
+        "PID": 45,
+        "name": "Forward Bloc (Marxist)",
+        "abbr": "FB(M)"
+    },
+    {
+        "PID": 46,
+        "name": "Ganatantra Parishad",
+        "abbr": "GP"
+    },
+    {
+        "PID": 47,
+        "name": "Haryana Janhit Congress",
+        "abbr": "HJC"
+    },
+    {
+        "PID": 48,
+        "name": "Haryana Lok Samiti",
+        "abbr": "HLS"
+    },
+    {
+        "PID": 49,
+        "name": "Haryana Vikas Party",
+        "abbr": "HVP"
+    },
+    {
+        "PID": 50,
+        "name": "Himachal Vikas Congress",
+        "abbr": "HVC"
+    },
+    {
+        "PID": 51,
+        "name": "Hindu Mahasabha",
+        "abbr": "HMS"
+    },
+    {
+        "PID": 52,
+        "name": "Independents",
+        "abbr": "IND"
+    },
+    {
+        "PID": 53,
+        "name": "Independent Democratic Party",
+        "abbr": "IDP"
+    },
+    {
+        "PID": 54,
+        "name": "Independent Parliamentary Group",
+        "abbr": "IPG"
+    },
+    {
+        "PID": 55,
+        "name": "Indian National Congress",
+        "abbr": "INC"
+    },
+    {
+        "PID": 56,
+        "name": "Indian National Lok Dal",
+        "abbr": "INLD"
+    },
+    {
+        "PID": 57,
+        "name": "Indian Peoples' Front",
+        "abbr": "IPF"
+    },
+    {
+        "PID": 58,
+        "name": "Indian Union Muslim League",
+        "abbr": "IUML"
+    },
+    {
+        "PID": 59,
+        "name": "Jammu and Kashmir National Conference",
+        "abbr": "JKNC"
+    },
+    {
+        "PID": 60,
+        "name": "Jammu and Kashmir Peoples Democratic Party",
+        "abbr": "JKPDP"
+    },
+    {
+        "PID": 61,
+        "name": "Jan Sangh",
+        "abbr": "BJS"
+    },
+    {
+        "PID": 62,
+        "name": "Janata Party",
+        "abbr": "JP"
+    },
+    {
+        "PID": 63,
+        "name": "Janata Party (S)",
+        "abbr": "JP(S)"
+    },
+    {
+        "PID": 64,
+        "name": "Janata Dal",
+        "abbr": "JD"
+    },
+    {
+        "PID": 65,
+        "name": "Janata Dal Secular",
+        "abbr": "JD(S)"
+    },
+    {
+        "PID": 66,
+        "name": "Janata Dal (United)",
+        "abbr": "JD(U)"
+    },
+    {
+        "PID": 67,
+        "name": "Jharkhand Mukti Morcha",
+        "abbr": "JMM"
+    },
+    {
+        "PID": 68,
+        "name": "Jharkhand Party",
+        "abbr": "JKP"
+    },
+    {
+        "PID": 69,
+        "name": "Jharkhand Vikas Morcha (Prajatantrik)",
+        "abbr": "JVM(P)"
+    },
+    {
+        "PID": 70,
+        "name": "Kerala Congress",
+        "abbr": "KC"
+    },
+    {
+        "PID": 71,
+        "name": "Kerala Congress (M)",
+        "abbr": "KC(M)"
+    },
+    {
+        "PID": 72,
+        "name": "Kisan Mazdoor Praja Party",
+        "abbr": "KMP"
+    },
+    {
+        "PID": 73,
+        "name": "Krishikar Lok Party",
+        "abbr": "KLP"
+    },
+    {
+        "PID": 74,
+        "name": "Lok Dal",
+        "abbr": "LD"
+    },
+    {
+        "PID": 75,
+        "name": "Lok Dal (Secular)",
+        "abbr": "LD(S)"
+    },
+    {
+        "PID": 76,
+        "name": "Lok Jan Shakti Party",
+        "abbr": "LJSP"
+    },
+    {
+        "PID": 78,
+        "name": "Lok Sewak Sangha",
+        "abbr": "LSS"
+    },
+    {
+        "PID": 79,
+        "name": "Lok Shakti",
+        "abbr": "LS"
+    },
+    {
+        "PID": 80,
+        "name": "Mahagujarat Janata Parishad",
+        "abbr": "MGJP"
+    },
+    {
+        "PID": 81,
+        "name": "Maharashtrawadi Gomantak Party",
+        "abbr": "MGP"
+    },
+    {
+        "PID": 82,
+        "name": "Manbhum Lok Sevak Sangh",
+        "abbr": "MLSS"
+    },
+    {
+        "PID": 83,
+        "name": "Manipur People's Party",
+        "abbr": "MPP"
+    },
+    {
+        "PID": 84,
+        "name": "Marumalarchi Dravida Munnetra Kazhagam",
+        "abbr": "MDMK"
+    },
+    {
+        "PID": 85,
+        "name": "Marxist Coordination",
+        "abbr": "MC"
+    },
+    {
+        "PID": 86,
+        "name": "MG",
+        "abbr": "MG"
+    },
+    {
+        "PID": 87,
+        "name": "Mizo National Front",
+        "abbr": "MNF"
+    },
+    {
+        "PID": 88,
+        "name": "Muslim League",
+        "abbr": "ML"
+    },
+    {
+        "PID": 89,
+        "name": "Nagaland Peoples Front",
+        "abbr": "NPF"
+    },
+    {
+        "PID": 90,
+        "name": "National Conference",
+        "abbr": "NC"
+    },
+    {
+        "PID": 91,
+        "name": "National Conference (Congress)",
+        "abbr": "NCC"
+    },
+    {
+        "PID": 92,
+        "name": "National Loktantrik Party",
+        "abbr": "NLP"
+    },
+    {
+        "PID": 93,
+        "name": "National People's Party",
+        "abbr": "NPP"
+    },
+    {
+        "PID": 94,
+        "name": "Nationalist Congress Party",
+        "abbr": "NCP"
+    },
+    {
+        "PID": 95,
+        "name": "Nationalist Democratic Progressive Party",
+        "abbr": "NDPP"
+    },
+    {
+        "PID": 96,
+        "name": "Nominated",
+        "abbr": "Nom"
+    },
+    {
+        "PID": 98,
+        "name": "Pattali Makkal Katchi",
+        "abbr": "PMK"
+    },
+    {
+        "PID": 99,
+        "name": "Peasants And Workers Party of India",
+        "abbr": "PAWPI"
+    },
+    {
+        "PID": 100,
+        "name": "Peoples' Democratic Front",
+        "abbr": "PDF"
+    },
+    {
+        "PID": 101,
+        "name": "Praja Socialist Party",
+        "abbr": "PSP"
+    },
+    {
+        "PID": 102,
+        "name": "Progressive Group",
+        "abbr": "PG"
+    },
+    {
+        "PID": 103,
+        "name": "Provincial Congress of Goa",
+        "abbr": "PCG"
+    },
+    {
+        "PID": 104,
+        "name": "Ram Rajya Parishad",
+        "abbr": "RRP"
+    },
+    {
+        "PID": 105,
+        "name": "Rashtriya Janata Dal",
+        "abbr": "RJD"
+    },
+    {
+        "PID": 106,
+        "name": "Rashtriya Janata Dal (Democratic)",
+        "abbr": "RJD(D)"
+    },
+    {
+        "PID": 107,
+        "name": "Rashtriya Lok Dal",
+        "abbr": "RLD"
+    },
+    {
+        "PID": 108,
+        "name": "Rashtriya Lok Samta Party",
+        "abbr": "RLSP"
+    },
+    {
+        "PID": 109,
+        "name": "Rashtriya Loktantrik Party",
+        "abbr": "RLP"
+    },
+    {
+        "PID": 110,
+        "name": "Republican Party of India",
+        "abbr": "RPI"
+    },
+    {
+        "PID": 111,
+        "name": "Republican Party of India (A)",
+        "abbr": "RPI(A)"
+    },
+    {
+        "PID": 112,
+        "name": "Revolutionary Socialist Party",
+        "abbr": "RSP"
+    },
+    {
+        "PID": 113,
+        "name": "Samajwadi Janata Party (Rashtriya)",
+        "abbr": "SJP(R)"
+    },
+    {
+        "PID": 114,
+        "name": "Samajwadi Party",
+        "abbr": "SP"
+    },
+    {
+        "PID": 115,
+        "name": "Samata Party",
+        "abbr": "SAP"
+    },
+    {
+        "PID": 116,
+        "name": "Samyakta Maharashtra Samiti",
+        "abbr": "SMS"
+    },
+    {
+        "PID": 117,
+        "name": "Samyukta Socialist Party",
+        "abbr": "SASP"
+    },
+    {
+        "PID": 118,
+        "name": "Scheduled Castes Federation",
+        "abbr": "SCF"
+    },
+    {
+        "PID": 119,
+        "name": "Shiromani Akali Dal",
+        "abbr": "SAD"
+    },
+    {
+        "PID": 120,
+        "name": "Shiromani Akali Dal (Simranjit Singh Mann)",
+        "abbr": "SAD(M)"
+    },
+    {
+        "PID": 121,
+        "name": "Shiv Sena",
+        "abbr": "SS"
+    },
+    {
+        "PID": 122,
+        "name": "Sikkim Democratic Front",
+        "abbr": "SDF"
+    },
+    {
+        "PID": 123,
+        "name": "Sikkim Krantikari Morcha",
+        "abbr": "SKM"
+    },
+    {
+        "PID": 124,
+        "name": "Sikkim Sangram Parishad",
+        "abbr": "SSP"
+    },
+    {
+        "PID": 125,
+        "name": "Socialist",
+        "abbr": "Socialist"
+    },
+    {
+        "PID": 127,
+        "name": "Swatantra Party",
+        "abbr": "SWP"
+    },
+    {
+        "PID": 128,
+        "name": "Swatantra Bharat Paksh",
+        "abbr": "SBP"
+    },
+    {
+        "PID": 129,
+        "name": "T.D.(V)",
+        "abbr": "T.D.(V)"
+    },
+    {
+        "PID": 130,
+        "name": "Tamil Manila Congress (Moopanar)",
+        "abbr": "TMC"
+    },
+    {
+        "PID": 131,
+        "name": "Tamil Nadu Toiler's Party",
+        "abbr": "TTP"
+    },
+    {
+        "PID": 132,
+        "name": "Telangana Rashtra Samithi",
+        "abbr": "TRS"
+    },
+    {
+        "PID": 133,
+        "name": "Telengana Praja Samiti",
+        "abbr": "TPS"
+    },
+    {
+        "PID": 134,
+        "name": "Telugu Desam Party",
+        "abbr": "TDP"
+    },
+    {
+        "PID": 135,
+        "name": "Unattached",
+        "abbr": "Unattached"
+    },
+    {
+        "PID": 136,
+        "name": "Union of Socialists and Progressive",
+        "abbr": "USP"
+    },
+    {
+        "PID": 137,
+        "name": "United Goans",
+        "abbr": "UG"
+    },
+    {
+        "PID": 138,
+        "name": "United Interparliaemntary Group",
+        "abbr": "UIP"
+    },
+    {
+        "PID": 139,
+        "name": "Utkal Congress",
+        "abbr": "UC"
+    },
+    {
+        "PID": 140,
+        "name": "Viduthalai Chiruthaigal Katchi",
+        "abbr": "VCK"
+    },
+    {
+        "PID": 141,
+        "name": "Yuvajana Sramika Rythu Congress Party",
+        "abbr": "YSRCP"
+    },
+    {
+        "PID": 213,
+        "name": "Hill State People's Democratic Party",
+        "abbr": "HSPDP"
+    },
+    {
+        "PID": 214,
+        "abbr": "DSP",
+        "name": "Democratic Socialist Party"
+    },
+    {
+        "PID": 215,
+        "name": "Bharatiya Lok Dal",
+        "abbr": "BLD"
+    },
+    {
+        "PID": 216,
+        "abbr": "Janta Lok Dal",
+        "name": "JLD"
+    },
+    {
+        "PID": 217,
+        "name": "PIP",
+        "abbr": "PIP"
+    },
+    {
+        "PID": 250,
+        "name": "Bharatiya Kisan Kamgar Party",
+        "abbr": "BKKP"
+    },
+    {
+        "PID": 251,
+        "name": "Nagaland People's Council",
+        "abbr": "NPC"
+    },
+    {
+        "PID": 252,
+        "name": "Gorkha National Liberation Front",
+        "abbr": "GNLF"
+    },
+    {
+        "PID": 253,
+        "name": "Travancore-Cochin Congress\t",
+        "abbr": "TTC"
+    },
+    {
+        "PID": 254,
+        "name": "Indian Federal Democratic Party",
+        "abbr": "IFDP"
+    },
+    {
+        "PID": 255,
+        "name": "United Minorities Front, Assam",
+        "abbr": "UMFA"
+    },
+    {
+        "PID": 256,
+        "name": "Manipur State Congress Party",
+        "abbr": "MSCP"
+    },
+    {
+        "PID": 257,
+        "name": "Akhil Bharatiya Hindu Mahasabha",
+        "abbr": "ABHMS"
+    },
+    {
+        "PID": 258,
+        "name": "West Bengal Trinamool Congress",
+        "abbr": "WBTC"
+    },
+    {
+        "PID": 259,
+        "name": "Haryana Lok Dal (Rashtriya)",
+        "abbr": "HLD(R)"
+    },
+    {
+        "PID": 260,
+        "name": "PDF(Communist)",
+        "abbr": "PDF"
+    }
+]

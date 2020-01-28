@@ -1,0 +1,153 @@
+import json
+
+newProf = { 
+    'agriculturist':'Agriculturist',
+    'advocate':'Lawyer',
+    'adviser':'Advisor',
+    'animal husbandry':'Animal husbandry',
+    'author':'Author',
+    'ayurvedic':'Ayurved',
+    'bar-at-law':'Lawyer',
+    'barrister-at-law':'Lawyer',
+    'banker':'Banker',
+    'bharatiya janata party':'Political worker',
+    'builder':'Builder',
+    'actor':'Film Artist',
+    'building and road contractor':'Contractor',
+    'business':'Business',
+    'businessman':'Business',
+    'businessperson':'Business',
+    'chariman':'Chairman',
+    'chartered accountant':'Chartered Accountant',
+    'cine exhibitor':'Cine Exhibitor',
+    'civil servant':'Civil Servant',
+    'civil service':'Civil Servant',
+    'comedian':'Comedian',
+    'commerce':'Commerce',
+    'communist':'Political worker',
+    'congress':'Political worker',
+    'consultant':'Consultant',
+    'consulting':'Consultant',
+    'c.p.i':'Political worker',
+    'cultivator':'Cultivator',
+    'defence services':'Defence',
+    'diplomat':'Diplomat',
+    'doctor':'Doctor',
+    'economist':'Economist',
+    'educationist':'Educationist',
+    'editor':'Editor',
+    'engineer':'Engineer',
+    'entrepreneur':'Entrepreneur',
+    'ex-governor':'Ex-Governor',
+    'ex-commissioned officer':'Ex-Commissioned Officer',
+    'exporter':'Exporter',
+    'farming':'Farmer',
+    'farmer':'Farmer',
+    'film artist':'Film Artist',
+    'artiste':'Artiste',
+    'film producer':'Film Producer',
+    'former judge':'Former Judge',
+    'founder':'Founder',
+    'founded':'Founder',
+    'government servant':'Civil Servant',
+    'harijan':'Political worker',
+    'homeopath':'Homeopath',
+    'horticulturist':'Horticulturist',
+    'ias officer':'IAS Officer',
+    'administrative service officer':'IAS Officer',
+    'i.t. professional':'I.T. Professional',
+    'imprison':'Imprisoned',
+    'imprisonment':'Imprisoned',
+    'industrialist':'Industrialist',
+    'ips':'IPS Officer',
+    'journalist':'Journalist',
+    'l.i.c.':'L.I.C Agent',
+    'lecturer':'Lecturer',
+    'landlord':'Landlord',
+    'lawyer':'Lawyer',
+    'legal practice':'Lawyer',
+    'legal practitioner':'Lawyer',
+    'legislative assembly':'MLA',
+    'literateur':'Literateur',
+    'lok sabha':'Lok Sabha member',
+    'll.b':'Lawyer',
+    'managing director':'Managing Director',
+    'merchant':'Merchant',
+    'medical practitioner':'Medical Practitioner',
+    'midwife':'Midwife',
+    'military service':'Military',
+    'millowner':'Mill owner',
+    'mine owner':'Mine owner',
+    'minister for education':'Education Minister',
+    'minister':'Minister',
+    'ministry of irrigation and power':'Ministry of Irrigation and Power',
+    'musician':'Musician',
+    'orator':'Orator',
+    'performing artiste':'Artist',
+    'pilot':'Pilot',
+    'pleader':'Lawyer',
+    'police service':'Police',
+    'politics':'Politician',
+    'political worker':'Political worker',
+    'political':'Political worker',
+    'politician':'Politician',
+    'poet':'Poet',
+    'poultry farming':'Poultry farming',
+    'philanthropist':'Philanthropist',
+    'physician':'Physician',
+    'principal':'Principal',
+    'professor':'Professor',
+    'producer and director':'Producer and Director',
+    'publisher':'Publisher',
+    'public worker':'Public Worker',
+    'real estate development':'Real Estate Development',
+    'religious missonary':'Religious Missonary',
+    'royal indian navy':'Royal Indian Navy',
+    'secretary':'Secretary',
+    'singer':'Singer',
+    'social worker':'Social worker',
+    'solicitor':'Lawyer',
+    'sportsman':'Sportsperson',
+    'sportsperson':'Sportsperson',
+    'surgeon':'Surgeon',
+    'teacher':'Teacher',
+    'telangana praja samithi':'Political worker',
+    'technologist':'Technologist',
+    'trader':'Trader',
+    'trade unionist':'Trade Union',
+    'trade union':'Trade Union',
+    'treasurer':'Treasurer',
+    'vakil':'Lawyer',
+    'veterinarian':'Veterinarian',
+    'weaver':'Weaver',
+    'widow':'Widow',
+    'widower':'Widow',
+    'writer':'Writer',
+    'worked among the backward muslim communities':'Community helper',
+    'zamindar':'Landlord',
+    'industralist':'Industralist'
+}
+
+
+with open('./witheducation.json', 'r', encoding='utf-8') as f:
+    members = json.load(f)
+
+newMembers = list()
+
+for member in members:
+    
+    
+    profList = list()
+
+    if member['__origin'] == "former":
+        rawProfession = member['profession'].lower()
+        for prof in newProf:
+            if prof in rawProfession:
+                profList.append(newProf[prof])
+
+    member['profession'] = list(dict.fromkeys(profList))
+
+    newMembers.append(member)
+
+with open('withprof.json', 'w', encoding='utf-8') as f:
+    json.dump(newMembers, f, ensure_ascii=False, indent=4)
