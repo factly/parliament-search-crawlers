@@ -15,7 +15,8 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
             'parlens.pipelines.members.MaritalCleaner': 30,
             'parlens.pipelines.members.ProfessionCleaner': 50,
             'parlens.pipelines.rsmembers.DOBCleaner': 60,
-            'parlens.pipelines.rsmembers.ChildrenCleaner': 70
+            'parlens.pipelines.rsmembers.ChildrenCleaner': 70,
+            'parlens.pipelines.rsmembers.RSMemberUploader': 80,
         }
     }
 

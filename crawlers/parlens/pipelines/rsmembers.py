@@ -1,5 +1,8 @@
+from scrapy.exceptions import DropItem
 import datetime
 import time
+import json
+import pymongo
 
 class ChildrenCleaner(object):
     def process_item(self, item, spider):
@@ -73,3 +76,26 @@ class DOBCleaner(object):
             item['dob'] = None
 
         return item
+
+class RSMemberUploader(object):
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        questionDict = list(db.all_members.find({'terms.to': { '$gt': datetime.datetime.now().timestamp() * 1000 } }, {'RSID': 1}))
+       
+        self.membersPresent = list()
+        
+        for each in questionDict:
+            self.membersPresent.append(each['RSID'])
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+       
+        if(item['RSID'] not in self.membersPresent):
+            return item
+        else:
+            raise DropItem('already_there')

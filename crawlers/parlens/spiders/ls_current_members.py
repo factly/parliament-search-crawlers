@@ -17,7 +17,8 @@ class LokSabhaCurrentMembers(scrapy.Spider):
             'parlens.pipelines.members.ProfessionCleaner': 40,
             'parlens.pipelines.lsmembers.DOBCleaner': 50,
             'parlens.pipelines.lsmembers.EmailCleaner': 60,
-            'parlens.pipelines.lsmembers.ChildrenCleaner': 70
+            'parlens.pipelines.lsmembers.ChildrenCleaner': 70,
+            'parlens.pipelines.lsmembers.LSMemberUploader': 80,
         }
     }
     
