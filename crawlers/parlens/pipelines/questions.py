@@ -2,13 +2,12 @@ from scrapy.exceptions import DropItem
 import pymongo
 import json
 import datetime
-import time
 
 
 class MinistryMatching(object):
 
     def open_spider(self, spider):    
-        self.error_file = open("errors.log","a+")
+        self.error_file = open("./logs/errors.log","a+")
         self.error_file.write("\n\n\n######## Lok Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         with open('./data/ministries.json', 'r', encoding='utf-8') as f:
             self.ministries = json.load(f)
@@ -92,7 +91,7 @@ class QuestionByMatching(object):
         db = self.client[config['database']]
         self.members = list(db.all_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
 
-        self.error_file = open("errors.log","a+")
+        self.error_file = open(".logs/errors.log","a+")
 
     def close_spider(self, spider):
         self.client.close()
@@ -118,11 +117,12 @@ class QuestionByMatching(object):
 class QuestionFinal(object):
 
     def process_item(self, item, spider):
+        dateRow = item['date'].split(".")
         houseMapper = {
             'Lok Sabha': 1,
             'Rajya Sabha': 2
         }
-        item['date'] = int(time.mktime(datetime.datetime.strptime(item['date'], "%d.%M.%Y").timetuple()) * 1000)
+        item['date'] = dateRow[2] + "-" + dateRow[1] + "-" + dateRow[0]
         item['house'] = houseMapper[item['house']]
 
         return item

@@ -31,7 +31,7 @@ class RsQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('bandwidth_exceeded')
 
-        self.error_file = open("errors.log","a+")
+        self.error_file = open("./logs/errors.log","a+")
         self.error_file.write("\n\n\n######## Rajya Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
     
@@ -42,7 +42,8 @@ class RsQuestionsSpider(scrapy.Spider):
             'parlens.pipelines.questions.MinistryMatching': 10, 
             'parlens.pipelines.questions.RSAskedByCleaning': 20,
             'parlens.pipelines.questions.QuestionByMatching': 30,
-            'parlens.pipelines.questions.QuestionFinal': 40
+            'parlens.pipelines.questions.QuestionFinal': 40,
+            'parlens.pipelines.rsquestions.RSQuestionUploader': 50
         }
     }
 

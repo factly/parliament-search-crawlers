@@ -17,7 +17,7 @@ class LSQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('session_not_found')
 
-        self.error_file = open("errors.log","a+")
+        self.error_file = open(".logs/errors.log","a+")
         self.start_urls = ["http://loksabhaph.nic.in/Questions/qsearch15.aspx?lsno="+session]
 
     custom_settings = { 
@@ -25,7 +25,8 @@ class LSQuestionsSpider(scrapy.Spider):
             'parlens.pipelines.questions.MinistryMatching': 10, 
             'parlens.pipelines.questions.LSAskedByCleaning': 20,
             'parlens.pipelines.questions.QuestionByMatching': 30,
-            'parlens.pipelines.questions.QuestionFinal': 40
+            'parlens.pipelines.questions.QuestionFinal': 40,
+            'parlens.pipelines.lsquestions.LSQuestionUploader': 50
         }
     }
     
