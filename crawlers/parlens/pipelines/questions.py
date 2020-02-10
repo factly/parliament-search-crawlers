@@ -26,24 +26,10 @@ class MinistryMatching(object):
             self.error_file.write(json.dumps(missing_message) + "\n")
             raise DropItem('ministry')
 
-class RSAskedByMatching(object):
-
-    def open_spider(self, spider):
-        config = json.load(open("./../config.cfg"))
-        
-        self.client = pymongo.MongoClient(config['mongodb_uri'])
-        db = self.client[config['database']]
-        self.members = list(db.rs_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
-
-        self.error_file = open("errors.log","a+")
-
-    def close_spider(self, spider):
-        self.client.close()
-
+class RSAskedByCleaning(object):
     def process_item(self, item, spider):
-        questionByIDs = list()
+        newQuestionBy = list()
         for asker in item['questionBy']:
-
             if 'Shri' in asker:
                 newName = asker.split('Shri', 1)
             elif 'SHRI' in asker:
@@ -80,9 +66,41 @@ class RSAskedByMatching(object):
                 }
                 self.error_file.write(json.dumps(missing_message) + "\n")
                 raise DropItem('name_prefix')
+                
+            newQuestionBy.append(" ".join(newName[1].split()).strip().title())
+        
+        item['questionBy'] = newQuestionBy
 
+        return item
 
-            askerList =  list(filter(lambda member: member['name'] == newName[1].strip().title(), self.members))
+class LSAskedByCleaning(object):
+    def process_item(self, item, spider):
+        newQuestionBy = list()
+        for asker in item['questionBy']:
+            newQuestionBy.append(" ".join(asker.split()).strip())
+        
+        item['questionBy'] = newQuestionBy
+
+        return item
+        
+class QuestionByMatching(object):
+
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        self.members = list(db.all_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
+
+        self.error_file = open("errors.log","a+")
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        questionByIDs = list()
+        for asker in item['questionBy']:
+            askerList =  list(filter(lambda member: member['name'] == asker, self.members))
             if(len(askerList) == 1):
                 questionByIDs.append(askerList[0]['MID'])
             else:
@@ -97,41 +115,6 @@ class RSAskedByMatching(object):
         item['questionBy'] = questionByIDs
         return item
 
-class LSAskedByMatching(object):
-
-    def open_spider(self, spider):
-        config = json.load(open("./../config.cfg"))
-        
-        self.client = pymongo.MongoClient(config['mongodb_uri'])
-        db = self.client[config['database']]
-        self.members = list(db.ls_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
-
-        self.error_file = open("errors.log","a+")
-    def close_spider(self, spider):
-        self.client.close()
-
-    def process_item(self, item, spider):
-        questionByIDs = list()
-        for asker in item['questionBy']:
-            
-                name = " ".join(asker.split()).strip()
-
-                askerList =  list(filter(lambda member: member['name'] == name, self.members))
-                
-                if(askerList and len(askerList) == 1):
-                    questionByIDs.append(askerList[0]['MID'])
-                else:
-                    missing_message = {
-                        'qref': item['qref'],
-                        'item': asker,
-                        'message': str(len(askerList)) + " match for question by"
-                    }
-                    self.error_file.write(json.dumps(missing_message) + "\n")
-                    raise DropItem('question_by')
-            
-        item['questionBy'] = questionByIDs
-        return item
-        
 class QuestionFinal(object):
 
     def process_item(self, item, spider):

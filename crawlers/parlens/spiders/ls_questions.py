@@ -23,8 +23,9 @@ class LSQuestionsSpider(scrapy.Spider):
     custom_settings = { 
         "ITEM_PIPELINES": {
             'parlens.pipelines.questions.MinistryMatching': 10, 
-            'parlens.pipelines.questions.LSAskedByMatching': 20,
-            'parlens.pipelines.questions.QuestionFinal': 30
+            'parlens.pipelines.questions.LSAskedByCleaning': 20,
+            'parlens.pipelines.questions.QuestionByMatching': 30,
+            'parlens.pipelines.questions.QuestionFinal': 40
         }
     }
     

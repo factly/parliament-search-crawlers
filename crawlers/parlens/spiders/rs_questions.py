@@ -40,8 +40,9 @@ class RsQuestionsSpider(scrapy.Spider):
     custom_settings = { 
         "ITEM_PIPELINES": {
             'parlens.pipelines.questions.MinistryMatching': 10, 
-            'parlens.pipelines.questions.RSAskedByMatching': 20,
-            'parlens.pipelines.questions.QuestionFinal': 30
+            'parlens.pipelines.questions.RSAskedByCleaning': 20,
+            'parlens.pipelines.questions.QuestionByMatching': 30,
+            'parlens.pipelines.questions.QuestionFinal': 40
         }
     }
 
