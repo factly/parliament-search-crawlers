@@ -17,9 +17,11 @@ class LSQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('session_not_found')
 
-        self.error_file = open(".logs/errors.log","a+")
         self.start_urls = ["http://loksabhaph.nic.in/Questions/qsearch15.aspx?lsno="+session]
 
+        self.error = open(".logs/errors.log","a+")
+        self.error.write("\n\n\n######## Lok Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
+        
     custom_settings = { 
         "ITEM_PIPELINES": {
             'parlens.pipelines.questions.MinistryMatching': 10, 
@@ -104,11 +106,11 @@ class LSQuestionsSpider(scrapy.Spider):
                 "qref" : response.meta['session'] + '_' + response.meta['qno'],
                 "message": 'something went wrong'
             }
-            self.error_file.write(json.dumps(error_message) + "\n")
+            self.error.write(json.dumps(error_message) + "\n")
     
     def error_handler(self,failure):
         error_message = {
             "qref" : failure,
             "message": "Error_handler"
         }
-        self.error_file.write(json.dumps(error_message) + "\n")
+        self.error.write(json.dumps(error_message) + "\n")

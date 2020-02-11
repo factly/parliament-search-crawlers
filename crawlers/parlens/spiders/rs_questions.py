@@ -31,10 +31,9 @@ class RsQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('bandwidth_exceeded')
 
-        self.error_file = open("./logs/errors.log","a+")
-        self.error_file.write("\n\n\n######## Rajya Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
+        self.error = open("./logs/errors.log","a+")
+        self.error.write("\n\n\n######## Rajya Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
-    
     start_urls = ['https://rajyasabha.nic.in/rsnew/Questions/Search_QnoWise.aspx']
 
     custom_settings = { 
@@ -131,11 +130,11 @@ class RsQuestionsSpider(scrapy.Spider):
                 "type": "ERROR",
                 "qref" : response.meta['session'] + '_' + response.meta['type'].strip() + '_' + response.meta['qno']
             }
-            self.error_file.write(json.dumps(error_message) + "\n")
+            self.error.write(json.dumps(error_message) + "\n")
 
     def error_handler(self,failure):
         error_message = {
             "type": "ERROR",
             "qref" : response.meta['session'] + '_' + response.meta['type'].strip() + '_' + response.meta['qno']
         }
-        self.error_file.write(json.dumps(error_message) + "\n")
+        self.error.write(json.dumps(error_message) + "\n")

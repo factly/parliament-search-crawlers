@@ -63,3 +63,4 @@ class RSMembers(scrapy.Item):
     profession = scrapy.Field()
     phone = scrapy.Field()
     email = scrapy.Field()
+    term = scrapy.Field()

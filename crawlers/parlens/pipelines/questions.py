@@ -7,8 +7,6 @@ import datetime
 class MinistryMatching(object):
 
     def open_spider(self, spider):    
-        self.error_file = open("./logs/errors.log","a+")
-        self.error_file.write("\n\n\n######## Lok Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         with open('./data/ministries.json', 'r', encoding='utf-8') as f:
             self.ministries = json.load(f)
 
@@ -22,7 +20,7 @@ class MinistryMatching(object):
                 'item': item['ministry'],
                 'message': "ministry not found"
             }
-            self.error_file.write(json.dumps(missing_message) + "\n")
+            spider.error.write(json.dumps(missing_message) + "\n")
             raise DropItem('ministry')
 
 class RSAskedByCleaning(object):
@@ -63,7 +61,7 @@ class RSAskedByCleaning(object):
                     'item': asker,
                     'message': "Prefix not found"
                 }
-                self.error_file.write(json.dumps(missing_message) + "\n")
+                spider.error.write(json.dumps(missing_message) + "\n")
                 raise DropItem('name_prefix')
                 
             newQuestionBy.append(" ".join(newName[1].split()).strip().title())
@@ -91,8 +89,6 @@ class QuestionByMatching(object):
         db = self.client[config['database']]
         self.members = list(db.all_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
 
-        self.error_file = open(".logs/errors.log","a+")
-
     def close_spider(self, spider):
         self.client.close()
 
@@ -108,7 +104,7 @@ class QuestionByMatching(object):
                     'item': asker,
                     'message': str(len(askerList)) + " match for question by"
                 }
-                self.error_file.write(json.dumps(missing_message) + "\n")
+                spider.error.write(json.dumps(missing_message) + "\n")
                 raise DropItem('question_by')
 
         item['questionBy'] = questionByIDs

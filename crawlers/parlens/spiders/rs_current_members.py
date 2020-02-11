@@ -8,7 +8,10 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
     
     start_urls = ['https://rajyasabha.nic.in/rsnew/member_site/memberlist.aspx']
     
-    custom_settings = { 
+    error = open("./logs/errors.log","a+")
+    error.write("\n\n\n######## Rajya Sabha Current Members Crawler "+str(datetime.datetime.now())+" ###########\n" )
+    
+    custom_settings = {
         "ITEM_PIPELINES": {
             'parlens.pipelines.members.NameCleaner': 10,
             'parlens.pipelines.members.EducationCleaner': 20,
@@ -16,7 +19,10 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
             'parlens.pipelines.members.ProfessionCleaner': 50,
             'parlens.pipelines.rsmembers.DOBCleaner': 60,
             'parlens.pipelines.rsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.rsmembers.RSMemberUploader': 80,
+            #'parlens.pipelines.rsmembers.DuplicateCleaner': 80,
+            'parlens.pipelines.rsmembers.GeoTermCleaner': 90,
+            'parlens.pipelines.rsmembers.PartyTermCleaner': 100,
+            'parlens.pipelines.rsmembers.TermConstructor': 100,
         }
     }
 

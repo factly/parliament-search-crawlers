@@ -39,7 +39,7 @@ class ChildrenCleaner(object):
 
         return item
 
-class LSDuplicateCleaner(object):
+class DuplicateCleaner(object):
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -100,9 +100,15 @@ class GeoTermCleaner(object):
             item['geography'] = self.constituenciesDict[constituencyKey]
             return item
         else:
+            missing_message = {
+                'LSID': item['LSID'],
+                'item': item,
+                'message': "geography not found"
+            }
+            spider.error.write(json.dumps(missing_message) + "\n")
             raise DropItem('geo_not_found')
 
-class GeoPartyCleaner(object):
+class PartyTermCleaner(object):
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -123,6 +129,12 @@ class GeoPartyCleaner(object):
             item['party'] = self.partiesDict[item['party']]
             return item
         else:
+            missing_message = {
+                'LSID': item['LSID'],
+                'item': item,
+                'message': "party not found"
+            }
+            spider.error.write(json.dumps(missing_message) + "\n")
             raise DropItem('party_not_found')
 
 class TermConstructor(object):

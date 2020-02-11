@@ -7,9 +7,12 @@ import json
 
 class LokSabhaCurrentMembers(scrapy.Spider):
     name = 'ls_current_members'
+
     start_urls = ['http://loksabhaph.nic.in/Members/AlphabeticalList.aspx']
 
-
+    error = open("./logs/errors.log","a+")
+    error.write("\n\n\n######## Lok Sabha Current Members Crawler "+str(datetime.datetime.now())+" ###########\n" )
+        
     session = 17
 
     custom_settings = { 
@@ -21,9 +24,9 @@ class LokSabhaCurrentMembers(scrapy.Spider):
             'parlens.pipelines.lsmembers.DOBCleaner': 50,
             'parlens.pipelines.lsmembers.EmailCleaner': 60,
             'parlens.pipelines.lsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.lsmembers.LSDuplicateCleaner': 80,
+            'parlens.pipelines.lsmembers.DuplicateCleaner': 80,
             'parlens.pipelines.lsmembers.GeoTermCleaner': 90,
-            'parlens.pipelines.lsmembers.GeoPartyCleaner': 100,
+            'parlens.pipelines.lsmembers.PartyTermCleaner': 100,
             'parlens.pipelines.lsmembers.TermConstructor': 110,
         }
     }

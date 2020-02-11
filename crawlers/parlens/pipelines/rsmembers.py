@@ -77,7 +77,7 @@ class DOBCleaner(object):
 
         return item
 
-class RSMemberUploader(object):
+class DuplicateCleaner(object):
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -99,3 +99,76 @@ class RSMemberUploader(object):
             return item
         else:
             raise DropItem('already_there')
+
+class GeoTermCleaner(object):
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        states = list(db.all_geography.find({'type': 'state'}))
+       
+        self.statesDict = dict()
+        for each in states:
+            self.statesDict[each['name']] = each['GID']
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        if(item['geography'] in self.statesDict):
+            item['geography'] = self.statesDict[item['geography']]
+            return item
+        else:
+            missing_message = {
+                'RSID': item['RSID'],
+                'item': item['geography'],
+                'message': "geography not found"
+            }
+            spider.error.write(json.dumps(missing_message) + "\n")
+            raise DropItem('geo_not_found')
+
+class PartyTermCleaner(object):
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        parties = list(db.all_parties.find({}))
+       
+        self.partiesDict = dict()
+        for each in parties:
+            self.partiesDict[each['name']] = each['PID']
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        
+        if(item['party'] in self.partiesDict):
+            item['party'] = self.partiesDict[item['party']]
+            return item
+        else:
+            missing_message = {
+                'RSID': item['RSID'],
+                'item': item['party'],
+                'message': "party not found"
+            }
+            spider.error.write(json.dumps(missing_message) + "\n")
+            raise DropItem('party_not_found')
+
+class TermConstructor(object):
+    def process_item(self, item, spider):
+        item['term'] = {
+            'geography': item['geography'],
+            'party': item['party'],
+            'house': 2,
+            'session': None,
+            'from': None,
+            'to': None
+        }
+
+        del item['geography']
+        del item['party']
+
+        return item
