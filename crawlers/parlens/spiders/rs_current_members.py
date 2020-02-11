@@ -7,7 +7,7 @@ import re
 class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
     name = 'rs_current_members'
     
-    start_urls = ['https://rajyasabha.nic.in/rsnew/member_site/memberlist.aspx']
+    start_urls = ['https://rajyasabha.nic.in/rsnew/member_site/MemlistElDate.aspx']
     
     error = open("./logs/errors.log","a+")
     error.write("\n\n\n######## Rajya Sabha Current Members Crawler "+str(datetime.datetime.now())+" ###########\n" )
@@ -35,22 +35,29 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
             "__EVENTTARGET":"ctl00$ContentPlaceHolder1$GridView2$ctl05$lkb",
             "__LASTFOCUS":"",
             "__VIEWSTATE":response.css("input#__VIEWSTATE::attr(value)").extract_first(),
-            "__VIEWSTATEGENERATOR":"DD5CA277",
+            "__VIEWSTATEGENERATOR":"5E964A8E",
             "ctl00$ContentPlaceHolder1$TextBox2":"",
             "ctl00$ContentPlaceHolder1$search_name":"",
             "domains":"rajyasabha.nic.in",
             "q":"",
-            "sitesearch":"rajyasabha.nic.in"
+            "sitesearch":"rajyasabha.nic.in",
+            "ctl00$ContentPlaceHolder1$RadioButtonList1": "Al"
         }
 
         for row in all_rows[1:]:
             member_link = row.css("td > font > a::attr(id)").extract_first().replace("_","$")
+            member_term_from = row.css("td")[4].css("::text").extract_first()
+            member_term_to = row.css("td")[5].css("::text").extract_first()
             list_req_params["__EVENTTARGET"] = member_link
             yield scrapy.FormRequest(
-                url = "https://rajyasabha.nic.in/rsnew/member_site/memberlist.aspx",
+                url = "https://rajyasabha.nic.in/rsnew/member_site/MemlistElDate.aspx",
                 formdata=list_req_params, 
                 callback=self.parse_profile, 
-                dont_filter=True, 
+                dont_filter=True,
+                meta={
+                    'term_from': member_term_from,
+                    'term_to': member_term_to
+                },
                 method="POST"
             )
        
@@ -73,8 +80,14 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
         yield RSMembers(
             RSID = int(RSID),
             name = name,
-            geography = geography,
-            party = party,
+            term = {
+                'geography': geography,
+                'party': party,
+                'from': response.meta['term_from'],
+                'to': response.meta['term_to'],
+                'house': 2,
+                'session': None
+            },
             dob = dob if dob != '-' else None,
             birth_place = birth_place if birth_place != '-' else None,
             marital_status = marital_status if marital_status != '-'  else None,

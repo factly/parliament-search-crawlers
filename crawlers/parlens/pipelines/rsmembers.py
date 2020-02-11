@@ -116,13 +116,13 @@ class GeoTermCleaner(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        if(item['geography'] in self.statesDict):
-            item['geography'] = self.statesDict[item['geography']]
+        if(item['term']['geography'] in self.statesDict):
+            item['term']['geography'] = self.statesDict[item['term']['geography']]
             return item
         else:
             missing_message = {
                 'RSID': item['RSID'],
-                'item': item['geography'],
+                'item': item['term'],
                 'message': "geography not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
@@ -145,13 +145,13 @@ class PartyTermCleaner(object):
 
     def process_item(self, item, spider):
         
-        if(item['party'] in self.partiesDict):
-            item['party'] = self.partiesDict[item['party']]
+        if(item['term']['party'] in self.partiesDict):
+            item['term']['party'] = self.partiesDict[item['term']['party']]
             return item
         else:
             missing_message = {
                 'RSID': item['RSID'],
-                'item': item['party'],
+                'item': item['term'],
                 'message': "party not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
@@ -159,16 +159,7 @@ class PartyTermCleaner(object):
 
 class TermConstructor(object):
     def process_item(self, item, spider):
-        item['term'] = {
-            'geography': item['geography'],
-            'party': item['party'],
-            'house': 2,
-            'session': None,
-            'from': None,
-            'to': None
-        }
-
-        del item['geography']
-        del item['party']
-
+        item['term']['from'] = int(time.mktime(datetime.datetime.strptime(item['term']['from'], "%d/%m/%Y").timetuple()) * 1000)
+        item['term']['to'] = int(time.mktime(datetime.datetime.strptime(item['term']['to'], "%d/%m/%Y").timetuple()) * 1000)
+        
         return item
