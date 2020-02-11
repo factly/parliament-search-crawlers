@@ -8,12 +8,20 @@ import datetime
 
 
 class LSQuestionsSpider(scrapy.Spider):
-    name = 'ls_questions'
+    name = 'ls_questions_by_date'
 
-    def __init__(self, session='', **kwargs):
+    def __init__(self, session='', from_date='', to_date='', **kwargs):
         super().__init__(**kwargs) 
         if(session):
             self.session = str(session)
+        else:
+            raise scrapy.exceptions.CloseSpider('session_not_found')
+        if(from_date):
+            self.from_date = str(from_date)
+        else:
+            raise scrapy.exceptions.CloseSpider('session_not_found')
+        if(to_date):
+            self.to_date = str(to_date)
         else:
             raise scrapy.exceptions.CloseSpider('session_not_found')
 
@@ -33,6 +41,35 @@ class LSQuestionsSpider(scrapy.Spider):
     }
     
     def parse(self,response):
+        form_data = {
+            "__EVENTTARGET": "",
+            "__EVENTARGUMENT": "",
+            "__VIEWSTATE": response.css('input#__VIEWSTATE::attr(value)').extract_first(),
+            "__VIEWSTATEGENERATOR": response.css('input#__VIEWSTATEGENERATOR::attr(value)').extract_first(),
+            "__VIEWSTATEENCRYPTED": "",
+            "__EVENTVALIDATION": response.css('input#__EVENTVALIDATION::attr(value)').extract_first(),
+            "ctl00$txtSearchGlobal": "",
+            "ctl00$ContentPlaceHolder1$ddlfile": ".pdf",
+            "ctl00$ContentPlaceHolder1$TextBox1": "",
+            "ctl00$ContentPlaceHolder1$btn": "allwordbtn",
+            "ctl00$ContentPlaceHolder1$btn1": "titlebtn",
+            "ctl00$ContentPlaceHolder1$btngo": "Go",
+            "ctl00$ContentPlaceHolder1$ddlfrom": self.from_date,
+            "ctl00$ContentPlaceHolder1$ddlto": self.to_date,
+            "ctl00$ContentPlaceHolder1$searchbtn": "Search"
+        }
+
+        yield FormRequest(
+            url = response.request.url,
+            formdata = form_data,
+            meta = {
+                'session': self.session
+            },
+            callback = self.parse_question_date,
+            errback = self.error_handler,
+        )
+
+    def parse_question_date(self,response):
         totolPages = str(response.css("span#ContentPlaceHolder1_lblfrom").css("::text").extract_first()).split(" ")
         maxPages = int(totolPages[2])
         form_data = {
