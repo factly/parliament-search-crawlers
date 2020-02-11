@@ -19,11 +19,11 @@ class LSQuestionsSpider(scrapy.Spider):
         if(from_date):
             self.from_date = str(from_date)
         else:
-            raise scrapy.exceptions.CloseSpider('session_not_found')
+            raise scrapy.exceptions.CloseSpider('from_date_not_found')
         if(to_date):
             self.to_date = str(to_date)
         else:
-            raise scrapy.exceptions.CloseSpider('session_not_found')
+            raise scrapy.exceptions.CloseSpider('to_date_not_found')
 
         self.start_urls = ["http://loksabhaph.nic.in/Questions/qsearch15.aspx?lsno="+session]
 
@@ -84,6 +84,8 @@ class LSQuestionsSpider(scrapy.Spider):
             "ctl00$ContentPlaceHolder1$TextBox1": "",
             "ctl00$ContentPlaceHolder1$btn": "allwordbtn",
             "ctl00$ContentPlaceHolder1$btn1": "titlebtn",
+            "ctl00$ContentPlaceHolder1$ddlfrom": self.from_date,
+            "ctl00$ContentPlaceHolder1$ddlto": self.to_date,
             "ctl00$ContentPlaceHolder1$btngo": "Go"
         }
 
