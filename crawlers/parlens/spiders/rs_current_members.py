@@ -19,7 +19,7 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
             'parlens.pipelines.members.ProfessionCleaner': 50,
             'parlens.pipelines.rsmembers.DOBCleaner': 60,
             'parlens.pipelines.rsmembers.ChildrenCleaner': 70,
-            #'parlens.pipelines.rsmembers.DuplicateCleaner': 80,
+            'parlens.pipelines.rsmembers.DuplicateCleaner': 80,
             'parlens.pipelines.rsmembers.GeoTermCleaner': 90,
             'parlens.pipelines.rsmembers.PartyTermCleaner': 100,
             'parlens.pipelines.rsmembers.TermConstructor': 100,
