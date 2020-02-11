@@ -3,7 +3,6 @@ import scrapy
 from parlens.items import LSMembers
 import re
 import datetime
-import json
 
 class LokSabhaCurrentMembers(scrapy.Spider):
     name = 'ls_current_members'
@@ -17,6 +16,7 @@ class LokSabhaCurrentMembers(scrapy.Spider):
 
     custom_settings = { 
         "ITEM_PIPELINES": {
+            'parlens.pipelines.lsmembers.DuplicateCleaner': 5,
             'parlens.pipelines.members.NameCleaner': 10,
             'parlens.pipelines.members.EducationCleaner': 20,
             'parlens.pipelines.members.MaritalCleaner': 30,
@@ -24,10 +24,9 @@ class LokSabhaCurrentMembers(scrapy.Spider):
             'parlens.pipelines.lsmembers.DOBCleaner': 50,
             'parlens.pipelines.lsmembers.EmailCleaner': 60,
             'parlens.pipelines.lsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.lsmembers.DuplicateCleaner': 80,
-            'parlens.pipelines.lsmembers.GeoTermCleaner': 90,
-            'parlens.pipelines.lsmembers.PartyTermCleaner': 100,
-            'parlens.pipelines.lsmembers.TermConstructor': 110,
+            'parlens.pipelines.lsmembers.GeoTermCleaner': 80,
+            'parlens.pipelines.lsmembers.PartyTermCleaner': 90,
+            'parlens.pipelines.lsmembers.TermConstructor': 100,
         }
     }
     

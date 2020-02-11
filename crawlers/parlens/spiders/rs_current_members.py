@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from parlens.items import RSMembers
+import datetime
 import re
 
 class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
@@ -13,15 +14,15 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
     
     custom_settings = {
         "ITEM_PIPELINES": {
+            'parlens.pipelines.rsmembers.DuplicateCleaner': 5,
             'parlens.pipelines.members.NameCleaner': 10,
             'parlens.pipelines.members.EducationCleaner': 20,
             'parlens.pipelines.members.MaritalCleaner': 30,
             'parlens.pipelines.members.ProfessionCleaner': 50,
             'parlens.pipelines.rsmembers.DOBCleaner': 60,
             'parlens.pipelines.rsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.rsmembers.DuplicateCleaner': 80,
-            'parlens.pipelines.rsmembers.GeoTermCleaner': 90,
-            'parlens.pipelines.rsmembers.PartyTermCleaner': 100,
+            'parlens.pipelines.rsmembers.GeoTermCleaner': 80,
+            'parlens.pipelines.rsmembers.PartyTermCleaner': 90,
             'parlens.pipelines.rsmembers.TermConstructor': 100,
         }
     }

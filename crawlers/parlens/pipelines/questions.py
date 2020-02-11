@@ -1,8 +1,6 @@
 from scrapy.exceptions import DropItem
 import pymongo
 import json
-import datetime
-
 
 class MinistryMatching(object):
 
