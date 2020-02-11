@@ -86,7 +86,7 @@ class LSQuestionsSpider(scrapy.Spider):
             for each in subAskedBy:
                 askedBy.append(each.replace("\r\n", "").strip())
 
-            item = Questions(
+            yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['qno'],
                 house = "Lok Sabha",
                 ministry = str(response.css("span#ContentPlaceHolder1_Label1").css("::text").extract_first()).strip(),
@@ -99,7 +99,6 @@ class LSQuestionsSpider(scrapy.Spider):
                 englishPdf = response.css("a#ContentPlaceHolder1_HyperLink1").css("::attr(href)").extract_first(),
                 type = str(response.css("span#ContentPlaceHolder1_Label2").css("::text").extract_first()).strip()
             )
-            yield item
 
         except:
             error_message = {

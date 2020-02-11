@@ -109,7 +109,7 @@ class RsQuestionsSpider(scrapy.Spider):
 
             linkTable = response.css("table#Table3")
 
-            item = Questions(
+            yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['type'].strip() + '_' + response.meta['qno'],
                 house = "Rajya Sabha",
                 ministry = str(response.css("span#ctl00_ContentPlaceHolder1_Label1").css("::text").extract_first()),
@@ -122,9 +122,7 @@ class RsQuestionsSpider(scrapy.Spider):
                 hindiPdf = linkTable.css("tr")[0].css("td")[0].css("a")[3].css("a::attr(href)").extract_first(),
                 type = response.meta['type'].strip()
             )
-
-            yield item
-
+            
         except:
             error_message = {
                 "type": "ERROR",
