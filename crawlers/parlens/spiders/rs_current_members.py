@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from parlens.items import Members
+from parlens.items import RSMembers
 import re
 
 class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
@@ -63,13 +63,13 @@ class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
         phone = re.findall("[0-9]{11}|[0-9]{10}", phoneRaw)
         emailRaw = response.css("img#ctl00_ContentPlaceHolder1_TabContainer1_TabPanel1_DetailsView1_Image21").css("::attr(src)").extract_first().split("=")[1].lower().replace(" ", "").replace("email", "").replace(":", "")
         email = emailRaw.split(";") if emailRaw != "" else list()
-        yield Members(
+        yield RSMembers(
             RSID = int(RSID),
             name = name,
             geography = geography,
             party = party,
-            state = 'India',
             dob = dob if dob != '-' else None,
+            birth_place = birth_place if birth_place != '-' else None,
             marital_status = marital_status if marital_status != '-'  else None,
             children = children if children != '-'  else None,
             education = education if education != '' else None,

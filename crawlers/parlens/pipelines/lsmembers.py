@@ -39,13 +39,13 @@ class ChildrenCleaner(object):
 
         return item
 
-class LSMemberUploader(object):
+class LSDuplicateCleaner(object):
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        questionDict = list(db.all_members.find({'terms.session': 17 }, {'LSID': 1}))
+        questionDict = list(db.all_members.find({'terms.session': spider.session }, {'LSID': 1}))
        
         self.membersPresent = list()
         
@@ -61,3 +61,89 @@ class LSMemberUploader(object):
             return item
         else:
             raise DropItem('already_there')
+
+class GeoTermCleaner(object):
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        constituencies = list(db.all_geography.aggregate([
+            {
+                '$match': {
+                    'type': 'constituency'
+                }
+            },
+            {
+                '$lookup': {
+                    'from': 'all_geography',
+                    'localField': 'parent',
+                    'foreignField': 'GID',
+                    'as': 'parent'
+                }
+            },
+            {
+                '$unwind': '$parent'
+            }
+        ]))
+       
+        self.constituenciesDict = dict()
+        for each in constituencies:
+            self.constituenciesDict[each['name'] + "#" + each['parent']['name'] + "#" + each['category']] = each['GID']
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        constituencyKey = item['geography'] + "#" + item['state'] + "#" + item['geography_type']
+        if(constituencyKey in self.constituenciesDict):
+            item['geography'] = self.constituenciesDict[constituencyKey]
+            return item
+        else:
+            raise DropItem('geo_not_found')
+
+class GeoPartyCleaner(object):
+    def open_spider(self, spider):
+        config = json.load(open("./../config.cfg"))
+        
+        self.client = pymongo.MongoClient(config['mongodb_uri'])
+        db = self.client[config['database']]
+        parties = list(db.all_parties.find({}))
+       
+        self.partiesDict = dict()
+        for each in parties:
+            self.partiesDict[each['name']] = each['PID']
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        
+        if(item['party'] in self.partiesDict):
+            item['party'] = self.partiesDict[item['party']]
+            return item
+        else:
+            raise DropItem('party_not_found')
+
+class TermConstructor(object):
+    def open_spider(self, spider):    
+        with open('./data/sessiondate.json', 'r', encoding='utf-8') as f:
+            sessiondates = json.load(f)
+
+        self.from_to = sessiondates[str(spider.session)]
+    def process_item(self, item, spider):
+        item['term'] = {
+            'geography': item['geography'],
+            'party': item['party'],
+            'house': 1,
+            'session': spider.session,
+            'from': self.from_to['from'],
+            'to': self.from_to['to']
+        }
+
+        del item['state']
+        del item['geography']
+        del item['geography_type']
+        del item['party']
+
+        return item

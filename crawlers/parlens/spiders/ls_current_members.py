@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from parlens.items import Members
+from parlens.items import LSMembers
 import re
 import datetime
 import json
@@ -8,6 +8,9 @@ import json
 class LokSabhaCurrentMembers(scrapy.Spider):
     name = 'ls_current_members'
     start_urls = ['http://loksabhaph.nic.in/Members/AlphabeticalList.aspx']
+
+
+    session = 17
 
     custom_settings = { 
         "ITEM_PIPELINES": {
@@ -18,16 +21,26 @@ class LokSabhaCurrentMembers(scrapy.Spider):
             'parlens.pipelines.lsmembers.DOBCleaner': 50,
             'parlens.pipelines.lsmembers.EmailCleaner': 60,
             'parlens.pipelines.lsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.lsmembers.LSMemberUploader': 80,
+            'parlens.pipelines.lsmembers.LSDuplicateCleaner': 80,
+            'parlens.pipelines.lsmembers.GeoTermCleaner': 90,
+            'parlens.pipelines.lsmembers.GeoPartyCleaner': 100,
+            'parlens.pipelines.lsmembers.TermConstructor': 110,
         }
     }
     
     def parse(self,response):
-        mp_url_list = response.css("tr.odd > td > a ::attr(href)").extract()[1::2]
-        
-        for mp_url in mp_url_list:
+        mp_list = response.css("tr.odd")
+        for mp in mp_list:
+            mp_url = mp.css("td")[1].css("a::attr(href)").extract_first()
+            party = mp.css("td")[2].css("::text").extract_first().strip()
             url = "http://loksabhaph.nic.in/Members/"+mp_url
-            yield scrapy.Request(url=url, callback=self.parse_profile)
+            yield scrapy.Request(
+                url=url, 
+                callback=self.parse_profile, 
+                meta={
+                    'party': party
+                }
+            )
 
     def parse_profile(self,response):
         item = {}
@@ -41,7 +54,11 @@ class LokSabhaCurrentMembers(scrapy.Spider):
         state = re.findall("\(.*\)",constituency)[0].strip('()')
         item['geography'] = constituency.replace(re.findall("\(.*\)",constituency)[0],"").strip()
 
+        geoType = state.split(')')[0].strip().upper()
+        if geoType != "SC" and geoType != "ST":
+            geoType = "GEN"
         item['state'] = state.split('(')[-1]
+        item['geography_type'] = geoType
         item['party'] = first_table[1]
         
         
@@ -74,12 +91,13 @@ class LokSabhaCurrentMembers(scrapy.Spider):
             elif heading == 'Permanent Address':
                 item['phone'] = re.findall("[0-9]{11}|[0-9]{10}", value)
 
-        yield Members(
+        yield LSMembers(
             LSID = item['LSID'],
             name = item['name'],
             geography = item['geography'],
             state = item['state'],
-            party = item['party'],
+            party = response.meta['party'], #item['party'],
+            geography_type = item['geography_type'],
             dob = item['dob'] if 'dob' in item else None,
             birth_place = item['birth_place'] if 'birth_place' in item else None,
             marital_status = item['marital_status'] if 'marital_status' in item else None,
