@@ -11,17 +11,17 @@ class DuplicateCleaner(object):
         db = self.client[config['database']]
         ministries = list(db.ministry.find({}))
        
-        self.ministriesDict = dict()
+        self.ministriesSet= set()
         
         for each in ministries:
-            self.ministriesDict[each['name']] = each['MINID']
+            self.ministriesSet.add(each['name'].replace(" ", ""))
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
        
-        if(item['name'] not in self.ministriesDict):
+        if(item['name'].replace(" ", "") not in self.ministriesSet):
             return item
         else:
             raise DropItem('already_there')
