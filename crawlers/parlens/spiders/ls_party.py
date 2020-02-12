@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-
 class LSPartySpider(scrapy.Spider):
     name = 'ls_party'
     start_urls = ['http://loksabhaph.nic.in/Members/PartywiseList.aspx']
+
+    custom_settings = { 
+        "ITEM_PIPELINES": {
+            'parlens.pipelines.parties.NameCleaner': 10,
+            'parlens.pipelines.parties.DuplicateCleaner': 20
+        }
+    }
 
     def parse(self, response):
         parties = response.css("table.member_list_table").css("tr")
