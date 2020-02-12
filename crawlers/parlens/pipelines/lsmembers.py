@@ -98,7 +98,6 @@ class GeoTermCleaner(object):
         constituencyKey = item['geography'] + "#" + item['state'] + "#" + item['geography_type']
         if(constituencyKey in self.constituenciesDict):
             item['geography'] = self.constituenciesDict[constituencyKey]
-            return item
         else:
             missing_message = {
                 'LSID': item['LSID'],
@@ -106,7 +105,8 @@ class GeoTermCleaner(object):
                 'message': "geography not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
-            raise DropItem('geo_not_found')
+        
+        return item 
 
 class PartyTermCleaner(object):
     def open_spider(self, spider):
@@ -127,7 +127,6 @@ class PartyTermCleaner(object):
         
         if(item['party'] in self.partiesDict):
             item['party'] = self.partiesDict[item['party']]
-            return item
         else:
             missing_message = {
                 'LSID': item['LSID'],
@@ -135,7 +134,8 @@ class PartyTermCleaner(object):
                 'message': "party not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
-            raise DropItem('party_not_found')
+            
+        return item
 
 class TermConstructor(object):
     def open_spider(self, spider):    

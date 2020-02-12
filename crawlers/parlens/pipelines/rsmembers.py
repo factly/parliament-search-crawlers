@@ -117,8 +117,7 @@ class GeoTermCleaner(object):
 
     def process_item(self, item, spider):
         if(item['term']['geography'] in self.statesDict):
-            item['term']['geography'] = self.statesDict[item['term']['geography']]
-            return item
+            item['term']['geography'] = self.statesDict[item['term']['geography']]  
         else:
             missing_message = {
                 'RSID': item['RSID'],
@@ -126,7 +125,7 @@ class GeoTermCleaner(object):
                 'message': "geography not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
-            raise DropItem('geo_not_found')
+        return item   
 
 class PartyTermCleaner(object):
     def open_spider(self, spider):
@@ -146,8 +145,7 @@ class PartyTermCleaner(object):
     def process_item(self, item, spider):
         
         if(item['term']['party'] in self.partiesDict):
-            item['term']['party'] = self.partiesDict[item['term']['party']]
-            return item
+            item['term']['party'] = self.partiesDict[item['term']['party']]     
         else:
             missing_message = {
                 'RSID': item['RSID'],
@@ -155,7 +153,7 @@ class PartyTermCleaner(object):
                 'message': "party not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
-            raise DropItem('party_not_found')
+        return item   
 
 class TermConstructor(object):
     def process_item(self, item, spider):

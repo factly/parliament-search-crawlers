@@ -1,5 +1,3 @@
-from scrapy.exceptions import DropItem
-
 class NameCleaner(object):
     def process_item(self, item, spider):
 

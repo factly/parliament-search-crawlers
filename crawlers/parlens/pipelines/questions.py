@@ -1,4 +1,3 @@
-from scrapy.exceptions import DropItem
 import pymongo
 import json
 
@@ -10,8 +9,7 @@ class MinistryMatching(object):
 
     def process_item(self, item, spider):
         if item['ministry'].strip().upper() in self.ministries:
-            item['ministry'] = self.ministries[item['ministry'].strip().upper()]
-            return item
+            item['ministry'] = self.ministries[item['ministry'].strip().upper()]   
         else:
             missing_message = {
                 'qref': item['qref'],
@@ -19,50 +17,50 @@ class MinistryMatching(object):
                 'message': "ministry not found"
             }
             spider.error.write(json.dumps(missing_message) + "\n")
-            raise DropItem('ministry')
+        return item
 
 class RSAskedByCleaning(object):
     def process_item(self, item, spider):
         newQuestionBy = list()
         for asker in item['questionBy']:
             if 'Shri' in asker:
-                newName = asker.split('Shri', 1)
+                newName = asker.split('Shri', 1)[1]
             elif 'SHRI' in asker:
-                newName = asker.split('SHRI', 1)
+                newName = asker.split('SHRI', 1)[1]
             elif 'Smt.' in asker:
-                newName = asker.split('Smt.', 1)
+                newName = asker.split('Smt.', 1)[1]
             elif 'Dr.' in asker:
-                newName = asker.split('Dr.', 1)
+                newName = asker.split('Dr.', 1)[1]
             elif 'DR.' in asker:
-                newName = asker.split('DR.', 1)
+                newName = asker.split('DR.', 1)[1]
             elif 'Prof.' in asker:
-                newName = asker.split('Prof.', 1)
+                newName = asker.split('Prof.', 1)[1]
             elif 'Ms.' in asker:
-                newName = asker.split('Ms.', 1)
+                newName = asker.split('Ms.', 1)[1]
             elif 'Miss' in asker:
-                newName = asker.split('Miss', 1)
+                newName = asker.split('Miss', 1)[1]
             elif 'Kumari' in asker:
-                newName = asker.split('Kumari', 1)
+                newName = asker.split('Kumari', 1)[1]
             elif 'Sardar' in asker:
-                newName = asker.split('Sardar', 1)
+                newName = asker.split('Sardar', 1)[1]
             elif 'Chaudhary' in asker:
-                newName = asker.split('Chaudhary', 1)
+                newName = asker.split('Chaudhary', 1)[1]
             elif 'Ch.' in asker:
-                newName = asker.split('Ch.', 1)
+                newName = asker.split('Ch.', 1)[1]
             elif 'Mahant' in asker:
-                newName = asker.split('Mahant', 1)
+                newName = asker.split('Mahant', 1)[1]
             elif 'Mir' in asker:
-                newName = asker.split('Mir', 1)
+                newName = asker.split('Mir', 1)[1]
             else:
+                newName = asker
                 missing_message = {
                     'qref': item['qref'],
                     'item': asker,
                     'message': "Prefix not found"
                 }
                 spider.error.write(json.dumps(missing_message) + "\n")
-                raise DropItem('name_prefix')
                 
-            newQuestionBy.append(" ".join(newName[1].split()).strip().title())
+            newQuestionBy.append(" ".join(newName.split()).strip().title())
         
         item['questionBy'] = newQuestionBy
 
@@ -103,9 +101,9 @@ class QuestionByMatching(object):
                     'message': str(len(askerList)) + " match for question by"
                 }
                 spider.error.write(json.dumps(missing_message) + "\n")
-                raise DropItem('question_by')
+            
 
-        item['questionBy'] = questionByIDs
+        item['questionBy'] = questionByIDs if len(questionByID) > 0 else item['questionBy']
         return item
 
 class QuestionFinal(object):
