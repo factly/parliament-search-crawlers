@@ -4,7 +4,7 @@ from parlens.items import LSMembers
 import re
 import datetime
 
-class LokSabhaCurrentMembers(scrapy.Spider):
+class LSCurrentMembers(scrapy.Spider):
     name = 'ls_current_members'
 
     start_urls = ['http://loksabhaph.nic.in/Members/AlphabeticalList.aspx']

@@ -4,7 +4,7 @@ from parlens.items import RSMembers
 import datetime
 import re
 
-class RajyaSabhaCurrentMembersSpider(scrapy.Spider):
+class RSCurrentMembersSpider(scrapy.Spider):
     name = 'rs_current_members'
     
     start_urls = ['https://rajyasabha.nic.in/rsnew/member_site/MemlistElDate.aspx']

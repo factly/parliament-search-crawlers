@@ -6,7 +6,7 @@ import json
 import datetime
 
 
-class RsQuestionsSpider(scrapy.Spider):
+class RSQuestionsSpider(scrapy.Spider):
     name = 'rs_questions'
 
     def __init__(self, session='', qtype='', **kwargs):

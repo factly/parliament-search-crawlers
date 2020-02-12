@@ -7,7 +7,7 @@ import json
 import datetime
 
 
-class LSQuestionsSpider(scrapy.Spider):
+class LSQuestionsByDateSpider(scrapy.Spider):
     name = 'ls_questions_by_date'
 
     def __init__(self, session='', from_date='', to_date='', **kwargs):
