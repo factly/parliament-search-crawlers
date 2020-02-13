@@ -65,16 +65,6 @@ class RSAskedByCleaning(object):
         item['questionBy'] = newQuestionBy
 
         return item
-
-class LSAskedByCleaning(object):
-    def process_item(self, item, spider):
-        newQuestionBy = list()
-        for asker in item['questionBy']:
-            newQuestionBy.append(" ".join(asker.split()).strip())
-        
-        item['questionBy'] = newQuestionBy
-
-        return item
         
 class QuestionByMatching(object):
 
