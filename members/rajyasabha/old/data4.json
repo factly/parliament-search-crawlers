@@ -1,0 +1,988 @@
+[
+    {
+        "name": "Abid Ali Shri",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "CONG(O)",
+                "from": "1964-4-3",
+                "to": "1970-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1958-4-3",
+                "to": "1964-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1954-4-3",
+                "to": "1958-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1952-4-3",
+                "to": "1954-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Advani Shri Lal K.",
+        "term": [
+            {
+                "state": "Madhya Pradesh",
+                "party": "BJP",
+                "from": "1988-4-3",
+                "to": "1989-11-27"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "BJP",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            },
+            {
+                "state": "Gujarat",
+                "party": "JS",
+                "from": "1976-4-3",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "National Capital Territory of Delhi",
+                "party": "JS",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Ahmad Dr. Z.A.",
+        "term": [
+            {
+                "state": "Uttar Pradesh",
+                "party": "CPI",
+                "from": "1990-8-23",
+                "to": "1994-4-2"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "CPI",
+                "from": "1972-4-3",
+                "to": "1978-4-2"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "CPI",
+                "from": "1966-4-3",
+                "to": "1972-4-2"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "CPI",
+                "from": "1958-4-3",
+                "to": "1962-3-19"
+            }
+        ]
+    },
+    {
+        "name": "Alva Smt. Margaret",
+        "term": [
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1992-4-3",
+                "to": "1998-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1986-4-3",
+                "to": "1992-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1980-4-3",
+                "to": "1986-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1974-4-3",
+                "to": "1980-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Amla Shri Tirath Ram",
+        "term": [
+            {
+                "state": "Jammu & Kashmir",
+                "party": "CONG(I)",
+                "from": "1985-12-12",
+                "to": "1991-12-11"
+            },
+            {
+                "state": "Jammu & Kashmir",
+                "party": "Congress",
+                "from": "1976-4-3",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "Jammu & Kashmir",
+                "party": "Congress",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "Jammu & Kashmir",
+                "party": "Congress",
+                "from": "1967-5-4",
+                "to": "1970-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Anup Singh Dr.",
+        "term": [
+            {
+                "state": "Punjab",
+                "party": "Congress",
+                "from": "1964-4-3",
+                "to": "1969-1-28"
+            },
+            {
+                "state": "Punjab",
+                "party": "Congress",
+                "from": "1962-4-3",
+                "to": "1962-11-22"
+            },
+            {
+                "state": "Punjab",
+                "party": "Congress",
+                "from": "1954-4-3",
+                "to": "1960-4-2"
+            },
+            {
+                "state": "Punjab",
+                "party": "Congress",
+                "from": "1952-4-3",
+                "to": "1954-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Biswas Shri Debabrata",
+        "term": [
+            {
+                "state": "West Bengal",
+                "party": "AIFB",
+                "from": "2008-4-3",
+                "to": "2008-9-23"
+            },
+            {
+                "state": "West Bengal",
+                "party": "AIFB",
+                "from": "2002-4-3",
+                "to": "2008-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "AIFB",
+                "from": "1996-4-3",
+                "to": "2002-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "FB",
+                "from": "1990-4-3",
+                "to": "1996-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Doogar Shri Rajpat Singh",
+        "term": [
+            {
+                "state": "West Bengal",
+                "party": "IND.",
+                "from": "1966-4-3",
+                "to": "1972-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "Congress",
+                "from": "1960-4-3",
+                "to": "1966-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "Congress",
+                "from": "1954-4-3",
+                "to": "1960-4-2"
+            },
+            {
+                "state": "West Bengal",
+                "party": "Congress",
+                "from": "1952-4-3",
+                "to": "1954-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Gurupadaswamy Shri M. S.",
+        "term": [
+            {
+                "state": "Uttar Pradesh",
+                "party": "JD",
+                "from": "1990-4-10",
+                "to": "1992-7-4"
+            },
+            {
+                "state": "Karnataka",
+                "party": "JD",
+                "from": "1984-4-10",
+                "to": "1990-4-9"
+            },
+            {
+                "state": "Mysore",
+                "party": "Congress",
+                "from": "1966-4-3",
+                "to": "1972-4-2"
+            },
+            {
+                "state": "Mysore",
+                "party": "Congress",
+                "from": "1960-4-3",
+                "to": "1966-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Jaitley Shri Arun",
+        "term": [
+            {
+                "state": "Uttar Pradesh",
+                "party": "BJP",
+                "from": "2018-4-3",
+                "to": "2019-8-24"
+            },
+            {
+                "state": "Gujarat",
+                "party": "BJP",
+                "from": "2012-4-3",
+                "to": "2018-4-2"
+            },
+            {
+                "state": "Gujarat",
+                "party": "BJP",
+                "from": "2006-4-3",
+                "to": "2012-4-2"
+            },
+            {
+                "state": "Gujarat",
+                "party": "BJP",
+                "from": "2000-4-3",
+                "to": "2006-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Kalita Shri Bhubaneswar",
+        "term": [
+            {
+                "state": "Assam",
+                "party": "INC",
+                "from": "2014-4-10",
+                "to": "2019-8-5"
+            },
+            {
+                "state": "Assam",
+                "party": "INC",
+                "from": "2008-4-10",
+                "to": "2014-4-9"
+            },
+            {
+                "state": "Assam",
+                "party": "INC",
+                "from": "1990-4-10",
+                "to": "1996-4-9"
+            },
+            {
+                "state": "Assam",
+                "party": "INC",
+                "from": "1984-4-10",
+                "to": "1990-4-9"
+            }
+        ]
+    },
+    {
+        "name": "Kalmadi Shri Suresh",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1998-7-5",
+                "to": "2004-5-13"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1994-4-3",
+                "to": "1996-5-10"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1988-4-3",
+                "to": "1994-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG (S)",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Karan Singh Dr.",
+        "term": [
+            {
+                "state": "National Capital Territory of Delhi",
+                "party": "INC",
+                "from": "2012-1-28",
+                "to": "2018-1-27"
+            },
+            {
+                "state": "National Capital Territory of Delhi",
+                "party": "INC",
+                "from": "2006-1-28",
+                "to": "2012-1-27"
+            },
+            {
+                "state": "National Capital Territory of Delhi",
+                "party": "INC",
+                "from": "2000-1-28",
+                "to": "2006-1-27"
+            },
+            {
+                "state": "Jammu & Kashmir",
+                "party": "J&KNC",
+                "from": "1996-11-30",
+                "to": "1999-8-12"
+            }
+        ]
+    },
+    {
+        "name": "Khan Shri K. Rahman",
+        "term": [
+            {
+                "state": "Karnataka",
+                "party": "INC",
+                "from": "2012-4-3",
+                "to": "2018-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "INC",
+                "from": "2006-4-3",
+                "to": "2012-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "INC",
+                "from": "2000-4-3",
+                "to": "2006-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1994-4-3",
+                "to": "2000-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Kulkarni Shri A.G.",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1986-7-5",
+                "to": "1992-4-27"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1978-4-3",
+                "to": "1984-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "INC",
+                "from": "1967-4-19",
+                "to": "1970-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Mahajan Shri Pramod",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "BJP",
+                "from": "2004-7-5",
+                "to": "2006-5-3"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "BJP",
+                "from": "1998-7-5",
+                "to": "2004-7-4"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "BJP",
+                "from": "1992-7-5",
+                "to": "1996-5-9"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "BJP",
+                "from": "1986-7-5",
+                "to": "1992-7-4"
+            }
+        ]
+    },
+    {
+        "name": "Manhar Shri Bhagatram",
+        "term": [
+            {
+                "state": "Chhattisgarh",
+                "party": "INC",
+                "from": "2000-11-1",
+                "to": "2003-6-19"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "INC",
+                "from": "2000-4-3",
+                "to": "2000-10-31"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "INC",
+                "from": "1984-4-10",
+                "to": "1990-4-9"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "INC",
+                "from": "1978-4-10",
+                "to": "1984-4-9"
+            }
+        ]
+    },
+    {
+        "name": "Mirdha Shri Ram Niwas",
+        "term": [
+            {
+                "state": "Rajasthan",
+                "party": "INC",
+                "from": "1980-7-5",
+                "to": "1984-12-29"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "CONG(I)",
+                "from": "1974-4-3",
+                "to": "1980-4-2"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "INC",
+                "from": "1968-4-3",
+                "to": "1974-4-2"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "INC",
+                "from": "1967-5-4",
+                "to": "1968-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Moopanar Shri G. K.",
+        "term": [
+            {
+                "state": "Tamil Nadu",
+                "party": "TMC(M)",
+                "from": "1998-6-30",
+                "to": "2001-8-30"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "1995-7-25",
+                "to": "1997-9-9"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "1983-7-25",
+                "to": "1989-2-2"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "1977-7-25",
+                "to": "2001-8-30"
+            }
+        ]
+    },
+    {
+        "name": "Naidu Shri M. Venkaiah",
+        "term": [
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "2016-7-5",
+                "to": "2017-8-10"
+            },
+            {
+                "state": "Karnataka",
+                "party": "BJP",
+                "from": "2010-7-1",
+                "to": "2016-6-23"
+            },
+            {
+                "state": "Karnataka",
+                "party": "BJP",
+                "from": "2004-7-1",
+                "to": "2010-6-30"
+            },
+            {
+                "state": "Karnataka",
+                "party": "BJP",
+                "from": "1998-4-3",
+                "to": "2004-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Natarajan Smt. Jayanthi",
+        "term": [
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "2008-4-3",
+                "to": "2014-4-2"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "TMC(M)",
+                "from": "1997-10-10",
+                "to": "2001-7-24"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "1992-6-30",
+                "to": "1997-9-9"
+            },
+            {
+                "state": "Tamil Nadu",
+                "party": "INC",
+                "from": "1986-6-30",
+                "to": "1992-6-29"
+            }
+        ]
+    },
+    {
+        "name": "Pachouri Shri Suresh",
+        "term": [
+            {
+                "state": "Madhya Pradesh",
+                "party": "INC",
+                "from": "2002-4-10",
+                "to": "2008-4-9"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1996-4-10",
+                "to": "2002-4-9"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1990-4-10",
+                "to": "1996-4-9"
+            },
+            {
+                "state": "Madhya Pradesh",
+                "party": "CONG(I)",
+                "from": "1984-4-10",
+                "to": "1990-4-9"
+            }
+        ]
+    },
+    {
+        "name": "Pande Shri Tarkeshwar",
+        "term": [
+            {
+                "state": "Uttar Pradesh",
+                "party": "Congress",
+                "from": "1966-7-30",
+                "to": "1970-4-2"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "Congress",
+                "from": "1964-4-3",
+                "to": "1964-12-15"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "Congress",
+                "from": "1958-4-3",
+                "to": "1964-4-2"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "Congress",
+                "from": "1952-4-3",
+                "to": "1958-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Pawar Shri D.Y.",
+        "term": [
+            {
+                "state": "Bombay",
+                "party": "CONG(I)",
+                "from": "1972-4-3",
+                "to": "1978-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1962-4-3",
+                "to": "1968-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1956-4-3",
+                "to": "1962-4-2"
+            },
+            {
+                "state": "Bombay",
+                "party": "Congress",
+                "from": "1952-4-3",
+                "to": "1956-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Prasad Shri Ravi Shankar",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "BJP",
+                "from": "2018-4-3",
+                "to": "2019-5-23"
+            },
+            {
+                "state": "Bihar",
+                "party": "BJP",
+                "from": "2012-4-3",
+                "to": "2018-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "BJP",
+                "from": "2006-4-3",
+                "to": "2012-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "BJP",
+                "from": "2000-4-3",
+                "to": "2006-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Rao Shri V. C. Kesava",
+        "term": [
+            {
+                "state": "Andhra Pradesh",
+                "party": "CONG(I)",
+                "from": "1980-4-3",
+                "to": "1986-4-2"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "Congress",
+                "from": "1974-4-3",
+                "to": "1980-4-2"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "Congress",
+                "from": "1962-4-3",
+                "to": "1967-3-14"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "Congress",
+                "from": "1956-4-3",
+                "to": "1962-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Rao Shri V. Hanumantha",
+        "term": [
+            {
+                "state": "Telangana",
+                "party": "INC",
+                "from": "2014-6-2",
+                "to": "2016-6-21"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "INC",
+                "from": "2010-6-22",
+                "to": "2014-6-1"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "INC",
+                "from": "2004-6-22",
+                "to": "2010-6-21"
+            },
+            {
+                "state": "Andhra Pradesh",
+                "party": "CONG(I)",
+                "from": "1992-4-3",
+                "to": "1998-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Reddy Shri Mulka Govinda",
+        "term": [
+            {
+                "state": "Karnataka",
+                "party": "CONG(I)",
+                "from": "1976-4-3",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "Congress",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "O",
+                "from": "1964-4-3",
+                "to": "1970-4-2"
+            },
+            {
+                "state": "Karnataka",
+                "party": "PSP",
+                "from": "1958-4-3",
+                "to": "1964-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Salve Shri N.K.P.",
+        "term": [
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1996-4-3",
+                "to": "2002-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1990-4-3",
+                "to": "1996-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1984-4-3",
+                "to": "1990-4-2"
+            },
+            {
+                "state": "Maharashtra",
+                "party": "CONG(I)",
+                "from": "1978-4-3",
+                "to": "1984-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Singh Shri Jaswant",
+        "term": [
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "2004-7-5",
+                "to": "2009-5-16"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "1998-7-5",
+                "to": "2004-7-4"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "1986-7-5",
+                "to": "1989-11-27"
+            },
+            {
+                "state": "Rajasthan",
+                "party": "BJP",
+                "from": "1980-7-5",
+                "to": "1986-7-4"
+            }
+        ]
+    },
+    {
+        "name": "Singh Smt. Pratibha",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "CONG(I)",
+                "from": "1988-4-3",
+                "to": "1992-7-6"
+            },
+            {
+                "state": "Bihar",
+                "party": "CONG(I)",
+                "from": "1982-4-3",
+                "to": "1988-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1976-4-3",
+                "to": "1982-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1970-12-31",
+                "to": "1976-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Sinha Shri Awadeshwar Prasad",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1970-4-3",
+                "to": "1976-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1964-4-3",
+                "to": "1970-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1958-4-3",
+                "to": "1964-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1956-12-10",
+                "to": "1958-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Sinha Shri Rajendra Pratap",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "Congress",
+                "from": "1966-4-3",
+                "to": "1972-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "PSP",
+                "from": "1960-4-3",
+                "to": "1966-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "IND.",
+                "from": "1954-4-3",
+                "to": "1960-4-2"
+            },
+            {
+                "state": "Bihar",
+                "party": "IND.",
+                "from": "1952-4-3",
+                "to": "1954-4-2"
+            }
+        ]
+    },
+    {
+        "name": "Yadav Shri Sharad",
+        "term": [
+            {
+                "state": "Bihar",
+                "party": "JD(U)",
+                "from": "2016-7-8",
+                "to": "2017-12-4"
+            },
+            {
+                "state": "Bihar",
+                "party": "JD(U)",
+                "from": "2014-6-13",
+                "to": "2016-7-7"
+            },
+            {
+                "state": "Bihar",
+                "party": "JD(U)",
+                "from": "2004-7-8",
+                "to": "2009-5-16"
+            },
+            {
+                "state": "Uttar Pradesh",
+                "party": "JD",
+                "from": "1986-7-5",
+                "to": "1989-11-28"
+            }
+        ]
+    }
+]
