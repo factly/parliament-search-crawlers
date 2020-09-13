@@ -14,16 +14,16 @@ class RSCurrentMembersSpider(scrapy.Spider):
     
     custom_settings = {
         "ITEM_PIPELINES": {
-            'parlens.pipelines.rsmembers.DuplicateCleaner': 5,
-            'parlens.pipelines.members.NameCleaner': 10,
-            'parlens.pipelines.members.EducationCleaner': 20,
-            'parlens.pipelines.members.MaritalCleaner': 30,
-            'parlens.pipelines.members.ProfessionCleaner': 50,
-            'parlens.pipelines.rsmembers.DOBCleaner': 60,
-            'parlens.pipelines.rsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.rsmembers.GeoTermCleaner': 80,
-            'parlens.pipelines.rsmembers.PartyTermCleaner': 90,
-            'parlens.pipelines.rsmembers.TermConstructor': 100,
+            'parlens.pipelines.rsmembers.DuplicateCleaner': 5, # remove already existing member based on RSID
+            'parlens.pipelines.members.NameCleaner': 10, # seprate name and prefix 
+            'parlens.pipelines.members.EducationCleaner': 20, # clean education field and assign value
+            'parlens.pipelines.members.MaritalCleaner': 30, # clean marital field and assign appropriate value
+            'parlens.pipelines.members.ProfessionCleaner': 50, # clean profession 
+            'parlens.pipelines.rsmembers.DOBCleaner': 60, # convert dob into timestamp
+            'parlens.pipelines.rsmembers.ChildrenCleaner': 70, # clean sons and daughters field
+            'parlens.pipelines.rsmembers.GeoTermCleaner': 80, # convert geography field into GID  
+            'parlens.pipelines.rsmembers.PartyTermCleaner': 90, # convert party field into PID
+            'parlens.pipelines.rsmembers.TermConstructor': 100, # Construct term object and remove party and geography field
         }
     }
 

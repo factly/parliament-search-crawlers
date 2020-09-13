@@ -5,6 +5,7 @@ import datetime
 import time
 
 class DOBCleaner(object):
+    # convert dob into unix time-stamp
     def process_item(self, item, spider):
         if 'dob' in item and item['dob'] != None:
             item['dob'] = int(time.mktime(datetime.datetime.strptime(item['dob'], "%d %b %Y").timetuple()) * 1000)
@@ -14,11 +15,12 @@ class DOBCleaner(object):
         return item
     
 class EmailCleaner(object):
+    # remove all the empty email and replace [DOT] and [AT] with "." and "@".
     def process_item(self, item, spider):
         if 'email' in item and len(item['email']) > 0:
             newEmailList = list()
             for each in item['email']:
-                newEmailList.append(each.replace("[DOT]", ".").replace("[AT]", "."))
+                newEmailList.append(each.replace("[DOT]", ".").replace("[AT]", "@"))
             item['email'] = newEmailList
         else:
             item['email'] = list()
@@ -26,6 +28,7 @@ class EmailCleaner(object):
         return item
 
 class ChildrenCleaner(object):
+    #convert non empty children info to int
     def process_item(self, item, spider):
         if 'sons' in item and item['sons'] != None:
             item['sons'] = int(item['sons'])
@@ -40,6 +43,7 @@ class ChildrenCleaner(object):
         return item
 
 class DuplicateCleaner(object):
+    # Every time spider start this function will fetch all member in given lok sabha session and add their LSID into one list
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -54,7 +58,7 @@ class DuplicateCleaner(object):
 
     def close_spider(self, spider):
         self.client.close()
-
+    # check if item LSID is present in db list then drop item otherwise return actual item
     def process_item(self, item, spider):
        
         if(item['LSID'] not in self.membersPresent):
@@ -63,6 +67,7 @@ class DuplicateCleaner(object):
             raise DropItem('already_there')
 
 class GeoTermCleaner(object):
+    # constuct dict with key as "${constituency_name}#${state_name}#${constituency_type}" and GID as value
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -93,7 +98,7 @@ class GeoTermCleaner(object):
 
     def close_spider(self, spider):
         self.client.close()
-
+    # replace geography name with GID
     def process_item(self, item, spider):
         constituencyKey = item['geography'] + "#" + item['state'] + "#" + item['geography_type']
         if(constituencyKey in self.constituenciesDict):
@@ -109,6 +114,7 @@ class GeoTermCleaner(object):
         return item 
 
 class PartyTermCleaner(object):
+    # constuct dict with key as party name and PID as value
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -122,7 +128,7 @@ class PartyTermCleaner(object):
 
     def close_spider(self, spider):
         self.client.close()
-
+    # replace party name with PID
     def process_item(self, item, spider):
         
         if(item['party'] in self.partiesDict):
@@ -143,6 +149,7 @@ class TermConstructor(object):
             sessiondates = json.load(f)
 
         self.from_to = sessiondates[str(spider.session)]
+    # constuct term object and delete all other term related info
     def process_item(self, item, spider):
         item['term'] = {
             'geography': item['geography'],

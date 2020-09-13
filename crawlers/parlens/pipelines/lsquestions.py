@@ -22,6 +22,7 @@ class QuestionByCleaning(object):
         
         return item
 
+# convert QuestionBy's LSID to MID
 class QuestionByMatching(object):
 
     def open_spider(self, spider):
@@ -56,6 +57,7 @@ class QuestionByMatching(object):
         item['questionBy'] = questionByIDs
         return item
 
+# remove already existing question based on qref (session_questionID)
 class QuestionUploader(object):
 
     def open_spider(self, spider):

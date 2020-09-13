@@ -12,7 +12,7 @@ class MinistriesSpider(scrapy.Spider):
 
     custom_settings = { 
         "ITEM_PIPELINES": {
-            'parlens.pipelines.ministries.DuplicateCleaner': 5
+            'parlens.pipelines.ministries.DuplicateCleaner': 5 #check db and remove all the already existing entry
         }
     }
 

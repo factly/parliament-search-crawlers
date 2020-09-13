@@ -2,6 +2,7 @@ from scrapy.exceptions import DropItem
 import pymongo
 import json
 
+# remove already existing ministry based on name
 class DuplicateCleaner(object):
 
     def open_spider(self, spider):

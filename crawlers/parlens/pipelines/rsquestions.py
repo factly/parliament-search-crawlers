@@ -1,7 +1,7 @@
 from scrapy.exceptions import DropItem
 import pymongo
 import json
-
+# based on qref remove already existing questions
 class RSQuestionUploader(object):
 
     def open_spider(self, spider):

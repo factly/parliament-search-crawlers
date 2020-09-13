@@ -4,6 +4,7 @@ import time
 import json
 import pymongo
 
+# divide children into 2 fields sons and daughters
 class ChildrenCleaner(object):
     def process_item(self, item, spider):
         if 'children' in item and item['children'] != None:
@@ -68,6 +69,7 @@ class ChildrenCleaner(object):
 
         return item
 
+# convert dob into unix time-stamp
 class DOBCleaner(object):
     def process_item(self, item, spider):
         if 'dob' in item and item['dob'] != None:
@@ -77,6 +79,7 @@ class DOBCleaner(object):
 
         return item
 
+# remove duplicate member based on RSID
 class DuplicateCleaner(object):
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
@@ -99,8 +102,9 @@ class DuplicateCleaner(object):
             return item
         else:
             raise DropItem('already_there')
-
+        
 class GeoTermCleaner(object):
+    # constuct dict with key as state_name and GID as value
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -114,7 +118,8 @@ class GeoTermCleaner(object):
 
     def close_spider(self, spider):
         self.client.close()
-
+    
+    # replace geography name with GID
     def process_item(self, item, spider):
         if(item['term']['geography'] in self.statesDict):
             item['term']['geography'] = self.statesDict[item['term']['geography']]  
@@ -128,6 +133,7 @@ class GeoTermCleaner(object):
         return item   
 
 class PartyTermCleaner(object):
+    # constuct dict with key as party name and PID as value
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         
@@ -141,7 +147,7 @@ class PartyTermCleaner(object):
 
     def close_spider(self, spider):
         self.client.close()
-
+    # replace party name with PID
     def process_item(self, item, spider):
         
         if(item['term']['party'] in self.partiesDict):
@@ -154,7 +160,7 @@ class PartyTermCleaner(object):
             }
             spider.error.write(json.dumps(missing_message) + "\n")
         return item   
-
+# constuct term object
 class TermConstructor(object):
     def process_item(self, item, spider):
         item['term']['from'] = int(time.mktime(datetime.datetime.strptime(item['term']['from'], "%d/%m/%Y").timetuple()) * 1000)
