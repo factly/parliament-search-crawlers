@@ -16,17 +16,17 @@ class LSCurrentMembers(scrapy.Spider):
 
     custom_settings = { 
         "ITEM_PIPELINES": {
-            'parlens.pipelines.lsmembers.DuplicateCleaner': 5,
-            'parlens.pipelines.members.NameCleaner': 10,
-            'parlens.pipelines.members.EducationCleaner': 20,
-            'parlens.pipelines.members.MaritalCleaner': 30,
-            'parlens.pipelines.members.ProfessionCleaner': 40,
-            'parlens.pipelines.lsmembers.DOBCleaner': 50,
-            'parlens.pipelines.lsmembers.EmailCleaner': 60,
-            'parlens.pipelines.lsmembers.ChildrenCleaner': 70,
-            'parlens.pipelines.lsmembers.GeoTermCleaner': 80,
-            'parlens.pipelines.lsmembers.PartyTermCleaner': 90,
-            'parlens.pipelines.lsmembers.TermConstructor': 100,
+            'parlens.pipelines.lsmembers.DuplicateCleaner': 5, # remove already existing member based on LSID
+            'parlens.pipelines.members.NameCleaner': 10, # seprate name and prefix 
+            'parlens.pipelines.members.EducationCleaner': 20, # clean education field and assign value
+            'parlens.pipelines.members.MaritalCleaner': 30, # clean marital field and assign appropriate value
+            'parlens.pipelines.members.ProfessionCleaner': 40, # clean profession 
+            'parlens.pipelines.lsmembers.DOBCleaner': 50, # convert dob into timestamp
+            'parlens.pipelines.lsmembers.EmailCleaner': 60, # clean email field
+            'parlens.pipelines.lsmembers.ChildrenCleaner': 70, # clean sons and daughters field
+            'parlens.pipelines.lsmembers.GeoTermCleaner': 80, # convert geography field into GID  
+            'parlens.pipelines.lsmembers.PartyTermCleaner': 90, # convert party field into PID
+            'parlens.pipelines.lsmembers.TermConstructor': 100, # Construct term object and remove party and geography field
         }
     }
     

@@ -1,8 +1,8 @@
 import pymongo
 import json
 
+# based on ministries.json change ministry name to MID 
 class MinistryMatching(object):
-
     def open_spider(self, spider):    
         with open('./data/ministries.json', 'r', encoding='utf-8') as f:
             self.ministries = json.load(f)
@@ -19,6 +19,7 @@ class MinistryMatching(object):
             spider.error.write(json.dumps(missing_message) + "\n")
         return item
 
+# remove prefix from questionBy
 class RSAskedByCleaning(object):
     def process_item(self, item, spider):
         newQuestionBy = list()
@@ -65,7 +66,8 @@ class RSAskedByCleaning(object):
         item['questionBy'] = newQuestionBy
 
         return item
-        
+
+# match questionBy name with db name
 class QuestionByMatching(object):
 
     def open_spider(self, spider):
@@ -95,7 +97,8 @@ class QuestionByMatching(object):
 
         item['questionBy'] = questionByIDs if len(questionByID) > 0 else item['questionBy']
         return item
-
+        
+# final check for question
 class QuestionFinal(object):
 
     def process_item(self, item, spider):

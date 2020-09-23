@@ -1,3 +1,4 @@
+# split memberName into name and prefix
 class NameCleaner(object):
     def process_item(self, item, spider):
 
@@ -13,7 +14,7 @@ class NameCleaner(object):
         item['memberName'] = fullname
 
         return item
-
+# clean education field based on the keywords
 class EducationCleaner(object):
     def process_item(self, item, spider):
         if 'education' in item and item['education'] != None:
@@ -51,7 +52,7 @@ class EducationCleaner(object):
             item['education'] = 7
 
         return item
-
+# clean marital status field 
 class MaritalCleaner(object):
     def process_item(self, item, spider):
         if 'marital_status' in item and item['marital_status'] != None:
@@ -76,6 +77,7 @@ class MaritalCleaner(object):
 
         return item
         
+# clean profession field
 class ProfessionCleaner(object):
     def process_item(self, item, spider):
         

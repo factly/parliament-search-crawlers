@@ -8,8 +8,8 @@ class RSPartySpider(scrapy.Spider):
 
     custom_settings = { 
         "ITEM_PIPELINES": {
-            'parlens.pipelines.parties.NameCleaner': 10,
-            'parlens.pipelines.parties.DuplicateCleaner': 20
+            'parlens.pipelines.parties.NameCleaner': 10, # remove abbr from name string
+            'parlens.pipelines.parties.DuplicateCleaner': 20 # remove already existig party
         }
     }
     

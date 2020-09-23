@@ -2,6 +2,7 @@ from scrapy.exceptions import DropItem
 import pymongo
 import json
 
+# seprate name and abbr from party text
 class NameCleaner(object):
     def process_item(self, item, spider):
         nameRaw = item['name']
@@ -18,9 +19,8 @@ class NameCleaner(object):
 
         return item
 
-
+# remove already existing party based on name
 class DuplicateCleaner(object):
-
     def open_spider(self, spider):
         config = json.load(open("./../config.cfg"))
         

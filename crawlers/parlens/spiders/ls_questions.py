@@ -24,11 +24,11 @@ class LSQuestionsSpider(scrapy.Spider):
         
     custom_settings = { 
         "ITEM_PIPELINES": {
-            'parlens.pipelines.questions.MinistryMatching': 10, 
-            'parlens.pipelines.lsquestions.QuestionByCleaning': 20,
-            'parlens.pipelines.lsquestions.QuestionByMatching': 30,
-            'parlens.pipelines.questions.QuestionFinal': 40,
-            'parlens.pipelines.lsquestions.QuestionUploader': 50
+            'parlens.pipelines.questions.MinistryMatching': 10, # convert ministry into MID
+            'parlens.pipelines.lsquestions.QuestionByCleaning': 20, 
+            'parlens.pipelines.lsquestions.QuestionByMatching': 30, # convert LSID to MID 
+            'parlens.pipelines.questions.QuestionFinal': 40, # final question cleaner
+            'parlens.pipelines.lsquestions.QuestionUploader': 50 # remove already existing question based on qref
         }
     }
 
