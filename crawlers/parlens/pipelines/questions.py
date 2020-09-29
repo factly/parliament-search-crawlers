@@ -93,9 +93,8 @@ class QuestionByMatching(object):
                     'message': str(len(askerList)) + " match for question by"
                 }
                 spider.error.write(json.dumps(missing_message) + "\n")
-            
 
-        item['questionBy'] = questionByIDs if len(questionByID) > 0 else item['questionBy']
+        item['questionBy'] = questionByIDs if len(questionByIDs) > 0 else item['questionBy']
         return item
         
 # final check for question
