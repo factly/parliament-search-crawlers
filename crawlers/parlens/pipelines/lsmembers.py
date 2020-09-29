@@ -49,7 +49,7 @@ class DuplicateCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        questionDict = list(db.all_members.find({'terms.session': spider.session }, {'LSID': 1}))
+        questionDict = list(db.members.find({'terms.session': spider.session }, {'LSID': 1}))
        
         self.membersPresent = list()
         

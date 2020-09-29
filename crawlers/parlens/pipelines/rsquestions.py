@@ -9,7 +9,7 @@ class RSQuestionUploader(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        questionDict = list(db.all_questions.find({'qref': {'$regex': spider.session + "_" + spider.questionType.strip(),  '$options': 'i'}}, {'qref': 1}))
+        questionDict = list(db.questions.find({'qref': {'$regex': spider.session + "_" + spider.questionType.strip(),  '$options': 'i'}}, {'qref': 1}))
        
         self.questionsPresent = list()
         

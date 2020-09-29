@@ -75,7 +75,7 @@ class QuestionByMatching(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        self.members = list(db.all_members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
+        self.members = list(db.members.find({}, {'MID': 1, 'name': 1, 'terms': 1}))
 
     def close_spider(self, spider):
         self.client.close()

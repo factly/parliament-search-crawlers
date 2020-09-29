@@ -45,7 +45,7 @@ class LSQuestionsSpider(scrapy.Spider):
             if name != None:
                 self.NameToLSID[" ".join(name.split())] = int(LSID)
 
-        print(self.NameToLSID)
+        # print(self.NameToLSID)
         totolPages = str(response.css("span#ContentPlaceHolder1_lblfrom").css("::text").extract_first()).split(" ")
         maxPages = int(totolPages[2])
         form_data = {

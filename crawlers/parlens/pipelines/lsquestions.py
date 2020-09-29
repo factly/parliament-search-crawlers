@@ -9,7 +9,7 @@ class QuestionByCleaning(object):
             askerNew = asker.replace(",", " ").strip()
             askerNew = " ".join(askerNew.split()).strip()
         
-            newQuestionBy.append(askerNew])
+            newQuestionBy.append(askerNew.upper())
            
 
         item['questionBy'] = newQuestionBy
@@ -24,12 +24,15 @@ class QuestionByMatching(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        members = list(db.all_members.find({'terms.house': 1, 'terms.session': int(spider.session)}, {'MID': 1, 'name': 1}))
+        members = list(db.members.find({'terms.house': 1, 'terms.session': int(spider.session)}, {'MID': 1, 'name': 1}))
         
+        print("***********************MEMBER LIST START***********************")
+        print(members)
+        print("***********************MEMBER LIST END***********************")
         self.LSIDtoMID = dict()
         
         for member in members:
-            self.LSIDtoMID[member['name']] = member['MID']
+            self.LSIDtoMID[member['name'].upper()] = member['MID']
 
     def close_spider(self, spider):
         self.client.close()
@@ -59,7 +62,7 @@ class QuestionUploader(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        questionDict = list(db.all_questions.find({'qref': {'$regex': spider.session + "_",  '$options': 'i'}}, {'qref': 1}))
+        questionDict = list(db.questions.find({'qref': {'$regex': spider.session + "_",  '$options': 'i'}}, {'qref': 1}))
        
         self.questionsPresent = list()
         
