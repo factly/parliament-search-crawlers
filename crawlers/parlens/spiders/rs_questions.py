@@ -31,7 +31,7 @@ class RSQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('bandwidth_exceeded')
 
-        self.error = open("./logs/errors.log","a+")
+        self.error = open("errors.log","a+")
         self.error.write("\n\n\n######## Rajya Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
     start_urls = ['https://rajyasabha.nic.in/rsnew/Questions/Search_QnoWise.aspx']

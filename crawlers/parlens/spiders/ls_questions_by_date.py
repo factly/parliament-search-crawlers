@@ -27,7 +27,7 @@ class LSQuestionsByDateSpider(scrapy.Spider):
 
         self.start_urls = ["http://loksabhaph.nic.in/Questions/qsearch15.aspx?lsno="+session]
 
-        self.error = open("./logs/errors.log","a+")
+        self.error = open("errors.log","a+")
         self.error.write("\n\n\n######## Lok Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
     custom_settings = { 
