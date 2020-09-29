@@ -8,15 +8,9 @@ class QuestionByCleaning(object):
         for asker in item['questionBy']:
             askerNew = asker.replace(",", " ").strip()
             askerNew = " ".join(askerNew.split()).strip()
-            if askerNew in spider.NameToLSID:
-                newQuestionBy.append(int(spider.NameToLSID[askerNew]))
-            else:
-                missing_message = {
-                    'qref': item['qref'],
-                    'item': askerNew,
-                    'message': "Name not found in NameToMID"
-                }
-                spider.error.write(json.dumps(missing_message) + "\n")
+        
+            newQuestionBy.append(askerNew])
+           
 
         item['questionBy'] = newQuestionBy
         
@@ -30,12 +24,12 @@ class QuestionByMatching(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        members = list(db.all_members.find({'terms.house': 1, 'terms.session': int(spider.session)}, {'MID': 1, 'LSID': 1}))
+        members = list(db.all_members.find({'terms.house': 1, 'terms.session': int(spider.session)}, {'MID': 1, 'name': 1}))
         
         self.LSIDtoMID = dict()
         
         for member in members:
-            self.LSIDtoMID[member['LSID']] = member['MID']
+            self.LSIDtoMID[member['name']] = member['MID']
 
     def close_spider(self, spider):
         self.client.close()
