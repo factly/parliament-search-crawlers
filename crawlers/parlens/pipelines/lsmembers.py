@@ -73,7 +73,7 @@ class GeoTermCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        constituencies = list(db.all_geography.aggregate([
+        constituencies = list(db.geography.aggregate([
             {
                 '$match': {
                     'type': 'constituency'
@@ -81,7 +81,7 @@ class GeoTermCleaner(object):
             },
             {
                 '$lookup': {
-                    'from': 'all_geography',
+                    'from': 'geography',
                     'localField': 'parent',
                     'foreignField': 'GID',
                     'as': 'parent'
@@ -91,11 +91,11 @@ class GeoTermCleaner(object):
                 '$unwind': '$parent'
             }
         ]))
-       
+
         self.constituenciesDict = dict()
         for each in constituencies:
             self.constituenciesDict[each['name'] + "#" + each['parent']['name'] + "#" + each['category']] = each['GID']
-
+        
     def close_spider(self, spider):
         self.client.close()
     # replace geography name with GID
@@ -120,7 +120,7 @@ class PartyTermCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        parties = list(db.all_parties.find({}))
+        parties = list(db.parties.find({}))
        
         self.partiesDict = dict()
         for each in parties:

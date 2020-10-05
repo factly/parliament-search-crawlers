@@ -38,11 +38,11 @@ class RSQuestionsSpider(scrapy.Spider):
 
     custom_settings = { 
         "ITEM_PIPELINES": {
+            'parlens.pipelines.rsquestions.DuplicateCleaner': 5, # remove already existing question based on qref
             'parlens.pipelines.questions.MinistryMatching': 10, # convert ministry into MID
-            'parlens.pipelines.questions.RSAskedByCleaning': 20, # remove prefix from name
-            'parlens.pipelines.questions.QuestionByMatching': 30, # convert name to MID
+            'parlens.pipelines.rsquestions.AskedByCleaning': 20, # remove prefix from name
+            'parlens.pipelines.rsquestions.QuestionByMatching': 30, # convert name to MID
             'parlens.pipelines.questions.QuestionFinal': 40, # final question cleaner
-            'parlens.pipelines.rsquestions.RSQuestionUploader': 50 # remove already existing question based on qref
         }
     }
 

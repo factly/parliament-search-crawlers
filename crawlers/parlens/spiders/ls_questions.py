@@ -24,11 +24,11 @@ class LSQuestionsSpider(scrapy.Spider):
         
     custom_settings = { 
         "ITEM_PIPELINES": {
+            'parlens.pipelines.lsquestions.DuplicateCleaner': 5, # remove already existing question based on qref
             'parlens.pipelines.questions.MinistryMatching': 10, # convert ministry into MID
             'parlens.pipelines.lsquestions.QuestionByCleaning': 20, 
             'parlens.pipelines.lsquestions.QuestionByMatching': 30, # convert LSID to MID 
             'parlens.pipelines.questions.QuestionFinal': 40, # final question cleaner
-            'parlens.pipelines.lsquestions.QuestionUploader': 50 # remove already existing question based on qref
         }
     }
 
@@ -37,15 +37,14 @@ class LSQuestionsSpider(scrapy.Spider):
     def parse(self,response):
 
         # Member name to LSID 
-        ministries = response.css("select#ContentPlaceHolder1_ddlmember").css("option")
+        members = response.css("select#ContentPlaceHolder1_ddlmember").css("option")
         
-        for ministry in ministries[1:]:
-            name = ministry.css("::text").extract_first()
-            LSID = ministry.css("::attr(value)").get()
+        for member in members[1:]:
+            name = member.css("::text").extract_first()
+            LSID = member.css("::attr(value)").get()
             if name != None:
                 self.NameToLSID[" ".join(name.split())] = int(LSID)
 
-        # print(self.NameToLSID)
         totolPages = str(response.css("span#ContentPlaceHolder1_lblfrom").css("::text").extract_first()).split(" ")
         maxPages = int(totolPages[2])
         form_data = {
@@ -94,13 +93,6 @@ class LSQuestionsSpider(scrapy.Spider):
 
     def parse_question(self,response):
         try:
-            '''askedBy = list()
-            askedBy.append(str(response.css("span#ContentPlaceHolder1_Label7").css("::text").extract_first()))
-            subAskedBy = response.css('table#ContentPlaceHolder1_GridView1').css("td.stylefontsize").css("::text").extract()
-            
-            for each in subAskedBy:
-                askedBy.append(each.replace("\r\n", "").replace(",", " ").strip())
-            '''
             yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['qno'],
                 house = "Lok Sabha",

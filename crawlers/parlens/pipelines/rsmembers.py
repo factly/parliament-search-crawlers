@@ -110,7 +110,7 @@ class GeoTermCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        states = list(db.all_geography.find({'type': 'state'}))
+        states = list(db.geography.find({'type': 'state'}))
        
         self.statesDict = dict()
         for each in states:
@@ -139,7 +139,7 @@ class PartyTermCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        parties = list(db.all_parties.find({}))
+        parties = list(db.parties.find({}))
        
         self.partiesDict = dict()
         for each in parties:
