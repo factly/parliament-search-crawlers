@@ -10,6 +10,15 @@ import datetime
 class LSQuestionsByDateSpider(scrapy.Spider):
     name = 'ls_questions_by_date'
 
+    def __session13NameCleaner__ (self, values):
+        result = dict()
+        for key in values:
+            nameArray = key.split(" ")
+            nameArray.pop(1)
+            result[(" ".join(nameArray[1:]) + " " + nameArray[0]).strip().upper()] = values[key]
+            
+        return result
+
     def __init__(self, session='', from_date='', to_date='', **kwargs):
         super().__init__(**kwargs) 
         if(session):
@@ -82,6 +91,9 @@ class LSQuestionsByDateSpider(scrapy.Spider):
             if name != None:
                 self.NameToLSID[" ".join(name.split())] = int(LSID)
 
+        if self.session == "13":
+            self.NameToLSID = self.__session13NameCleaner__(self.NameToLSID)
+            
         totolPages = str(response.css("span#ContentPlaceHolder1_lblfrom").css("::text").extract_first()).split(" ")
         maxPages = int(totolPages[2])
         form_data = {
@@ -135,12 +147,12 @@ class LSQuestionsByDateSpider(scrapy.Spider):
             yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['qno'],
                 house = "Lok Sabha",
+                questionBy = response.meta['questionBy'],
                 ministry = str(response.css("span#ContentPlaceHolder1_Label1").css("::text").extract_first()).strip(),
                 date = str(response.css("span#ContentPlaceHolder1_Label4").css("::text").extract_first()),
                 subject = str(response.css("span#ContentPlaceHolder1_Label5").css("::text").extract_first()).strip(),
                 question = response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[0].get(),
                 answer = response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[1].get(),
-                questionBy = response.meta['questionBy'],
                 hindiPdf = response.css("a#ContentPlaceHolder1_HyperLink2").css("::attr(href)").extract_first(),
                 englishPdf = response.css("a#ContentPlaceHolder1_HyperLink1").css("::attr(href)").extract_first(),
                 type = str(response.css("span#ContentPlaceHolder1_Label2").css("::text").extract_first()).strip()

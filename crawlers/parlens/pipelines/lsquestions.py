@@ -63,8 +63,6 @@ class QuestionByMatching(object):
 
         for member in members:
             self.LSIDtoMID[member['LSID']] = member['MID']
-    
-        spider.error.write(json.dumps(self.LSIDtoMID) + "\n")
 
     def close_spider(self, spider):
         self.client.close()
@@ -79,7 +77,6 @@ class QuestionByMatching(object):
                 missing_message = {
                     'qref': item['qref'],
                     'item': asker,
-                    'extra': item['questionBy'],
                     'message': "LSID not found in LSIDtoMID"
                 }
                 spider.error.write(json.dumps(missing_message) + "\n")

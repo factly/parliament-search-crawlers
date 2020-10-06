@@ -112,12 +112,12 @@ class RSQuestionsSpider(scrapy.Spider):
             yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['type'].strip() + '_' + response.meta['qno'],
                 house = "Rajya Sabha",
+                questionBy = response.css("span#ctl00_ContentPlaceHolder1_LabMp").css("::text").extract(),
                 ministry = str(response.css("span#ctl00_ContentPlaceHolder1_Label1").css("::text").extract_first()),
                 date = str(response.css("span#ctl00_ContentPlaceHolder1_Label6").css("::text").extract_first()),
                 subject = str(response.css("span#ctl00_ContentPlaceHolder1_LabTitle").css("::text").extract_first()),
                 question = response.css("span#ctl00_ContentPlaceHolder1_LabQn").get(),
                 answer = response.css("span#ctl00_ContentPlaceHolder1_LabAns").get(),
-                questionBy = response.css("span#ctl00_ContentPlaceHolder1_LabMp").css("::text").extract(),
                 englishPdf = linkTable.css("tr")[0].css("td")[0].css("a")[1].css("a::attr(href)").extract_first(),
                 hindiPdf = linkTable.css("tr")[0].css("td")[0].css("a")[3].css("a::attr(href)").extract_first(),
                 type = response.meta['type'].strip()

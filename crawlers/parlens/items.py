@@ -16,12 +16,12 @@ class ParlensItem(scrapy.Item):
 class Questions(scrapy.Item):
     qref = scrapy.Field()
     house = scrapy.Field()
+    questionBy = scrapy.Field()
     ministry = scrapy.Field()
     date = scrapy.Field()
     subject = scrapy.Field()
     question = scrapy.Field()
     answer = scrapy.Field()
-    questionBy = scrapy.Field()
     englishPdf = scrapy.Field()
     hindiPdf = scrapy.Field()
     type = scrapy.Field()
