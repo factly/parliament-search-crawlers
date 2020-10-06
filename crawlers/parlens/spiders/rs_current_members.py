@@ -9,7 +9,7 @@ class RSCurrentMembersSpider(scrapy.Spider):
     
     start_urls = ['https://rajyasabha.nic.in/rsnew/member_site/MemlistElDate.aspx']
     
-    error = open("./logs/errors.log","a+")
+    error = open("errors.log","a+")
     error.write("\n\n\n######## Rajya Sabha Current Members Crawler "+str(datetime.datetime.now())+" ###########\n" )
     
     custom_settings = {

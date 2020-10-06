@@ -31,18 +31,18 @@ class RSQuestionsSpider(scrapy.Spider):
         else:
             raise scrapy.exceptions.CloseSpider('bandwidth_exceeded')
 
-        self.error = open("./logs/errors.log","a+")
+        self.error = open("errors.log","a+")
         self.error.write("\n\n\n######## Rajya Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
     start_urls = ['https://rajyasabha.nic.in/rsnew/Questions/Search_QnoWise.aspx']
 
     custom_settings = { 
         "ITEM_PIPELINES": {
+            'parlens.pipelines.rsquestions.DuplicateCleaner': 5, # remove already existing question based on qref
             'parlens.pipelines.questions.MinistryMatching': 10, # convert ministry into MID
-            'parlens.pipelines.questions.RSAskedByCleaning': 20, # remove prefix from name
-            'parlens.pipelines.questions.QuestionByMatching': 30, # convert name to MID
+            'parlens.pipelines.rsquestions.AskedByCleaning': 20, # remove prefix from name
+            'parlens.pipelines.rsquestions.QuestionByMatching': 30, # convert name to MID
             'parlens.pipelines.questions.QuestionFinal': 40, # final question cleaner
-            'parlens.pipelines.rsquestions.RSQuestionUploader': 50 # remove already existing question based on qref
         }
     }
 
@@ -112,12 +112,12 @@ class RSQuestionsSpider(scrapy.Spider):
             yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['type'].strip() + '_' + response.meta['qno'],
                 house = "Rajya Sabha",
+                questionBy = response.css("span#ctl00_ContentPlaceHolder1_LabMp").css("::text").extract(),
                 ministry = str(response.css("span#ctl00_ContentPlaceHolder1_Label1").css("::text").extract_first()),
                 date = str(response.css("span#ctl00_ContentPlaceHolder1_Label6").css("::text").extract_first()),
                 subject = str(response.css("span#ctl00_ContentPlaceHolder1_LabTitle").css("::text").extract_first()),
                 question = response.css("span#ctl00_ContentPlaceHolder1_LabQn").get(),
                 answer = response.css("span#ctl00_ContentPlaceHolder1_LabAns").get(),
-                questionBy = response.css("span#ctl00_ContentPlaceHolder1_LabMp").css("::text").extract(),
                 englishPdf = linkTable.css("tr")[0].css("td")[0].css("a")[1].css("a::attr(href)").extract_first(),
                 hindiPdf = linkTable.css("tr")[0].css("td")[0].css("a")[3].css("a::attr(href)").extract_first(),
                 type = response.meta['type'].strip()

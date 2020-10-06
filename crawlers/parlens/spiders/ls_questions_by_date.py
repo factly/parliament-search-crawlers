@@ -10,6 +10,15 @@ import datetime
 class LSQuestionsByDateSpider(scrapy.Spider):
     name = 'ls_questions_by_date'
 
+    def __session13NameCleaner__ (self, values):
+        result = dict()
+        for key in values:
+            nameArray = key.split(" ")
+            nameArray.pop(1)
+            result[(" ".join(nameArray[1:]) + " " + nameArray[0]).strip().upper()] = values[key]
+            
+        return result
+
     def __init__(self, session='', from_date='', to_date='', **kwargs):
         super().__init__(**kwargs) 
         if(session):
@@ -27,18 +36,20 @@ class LSQuestionsByDateSpider(scrapy.Spider):
 
         self.start_urls = ["http://loksabhaph.nic.in/Questions/qsearch15.aspx?lsno="+session]
 
-        self.error = open("./logs/errors.log","a+")
+        self.error = open("errors.log","a+")
         self.error.write("\n\n\n######## Lok Sabha Question Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
-    custom_settings = { 
+    custom_settings = {
         "ITEM_PIPELINES": {
-            'parlens.pipelines.questions.MinistryMatching': 10, 
-            'parlens.pipelines.questions.LSAskedByCleaning': 20,
-            'parlens.pipelines.questions.QuestionByMatching': 30,
-            'parlens.pipelines.questions.QuestionFinal': 40,
-            'parlens.pipelines.lsquestions.LSQuestionUploader': 50
+            'parlens.pipelines.lsquestions.DuplicateCleaner': 5, # remove already existing question based on qref
+            'parlens.pipelines.questions.MinistryMatching': 10, # convert ministry into MID
+            'parlens.pipelines.lsquestions.QuestionByCleaning': 20, 
+            'parlens.pipelines.lsquestions.QuestionByMatching': 30, # convert LSID to MID 
+            'parlens.pipelines.questions.QuestionFinal': 40, # final question cleaner
         }
     }
+
+    NameToLSID = dict()
     
     def parse(self,response):
         form_data = {
@@ -70,6 +81,19 @@ class LSQuestionsByDateSpider(scrapy.Spider):
         )
 
     def parse_question_date(self,response):
+        
+        # Member name to LSID
+        members = response.css("select#ContentPlaceHolder1_ddlmember").css("option")
+        
+        for member in members[1:]:
+            name = member.css("::text").extract_first()
+            LSID = member.css("::attr(value)").get()
+            if name != None:
+                self.NameToLSID[" ".join(name.split())] = int(LSID)
+
+        if self.session == "13":
+            self.NameToLSID = self.__session13NameCleaner__(self.NameToLSID)
+            
         totolPages = str(response.css("span#ContentPlaceHolder1_lblfrom").css("::text").extract_first()).split(" ")
         maxPages = int(totolPages[2])
         form_data = {
@@ -106,34 +130,29 @@ class LSQuestionsByDateSpider(scrapy.Spider):
         for each in products[1:]:
             QuestionLink = each.css("td")[0].css("a::attr(href)").extract()[0].split("?")[1]
             qref = QuestionLink.split("&")[0].split("=")[1]
+            questionBy = each.css("td")[4].css("a::text").extract()
             yield Request(
                 url = "http://loksabhaph.nic.in/Questions/QResult15.aspx?qref="+str(qref)+"&lsno="+response.meta['session'],
                 callback = self.parse_question,
                 errback = self.error_handler,
                 meta = {
                     'session': response.meta['session'],
-                    'qno': str(qref)
+                    'qno': str(qref),
+                    'questionBy': questionBy
                 }
             )
 
     def parse_question(self,response):
         try:
-            askedBy = list()
-            askedBy.append(str(response.css("span#ContentPlaceHolder1_Label7").css("::text").extract_first()))
-            subAskedBy = response.css('table#ContentPlaceHolder1_GridView1').css("td.stylefontsize").css("::text").extract()
-            
-            for each in subAskedBy:
-                askedBy.append(each.replace("\r\n", "").strip())
-
             yield Questions(
                 qref = response.meta['session'] + '_' + response.meta['qno'],
                 house = "Lok Sabha",
+                questionBy = response.meta['questionBy'],
                 ministry = str(response.css("span#ContentPlaceHolder1_Label1").css("::text").extract_first()).strip(),
                 date = str(response.css("span#ContentPlaceHolder1_Label4").css("::text").extract_first()),
                 subject = str(response.css("span#ContentPlaceHolder1_Label5").css("::text").extract_first()).strip(),
                 question = response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[0].get(),
                 answer = response.css("table[style='margin-top: -15px;']").css("td.stylefontsize")[1].get(),
-                questionBy = askedBy,
                 hindiPdf = response.css("a#ContentPlaceHolder1_HyperLink2").css("::attr(href)").extract_first(),
                 englishPdf = response.css("a#ContentPlaceHolder1_HyperLink1").css("::attr(href)").extract_first(),
                 type = str(response.css("span#ContentPlaceHolder1_Label2").css("::text").extract_first()).strip()

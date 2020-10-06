@@ -9,7 +9,7 @@ class LSCurrentMembers(scrapy.Spider):
 
     start_urls = ['http://loksabhaph.nic.in/Members/AlphabeticalList.aspx']
 
-    error = open("./logs/errors.log","a+")
+    error = open("errors.log","a+")
     error.write("\n\n\n######## Lok Sabha Current Members Crawler "+str(datetime.datetime.now())+" ###########\n" )
         
     session = 17

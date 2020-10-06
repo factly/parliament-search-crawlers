@@ -26,7 +26,7 @@ class DuplicateCleaner(object):
         
         self.client = pymongo.MongoClient(config['mongodb_uri'])
         db = self.client[config['database']]
-        parties = list(db.all_parties.find({}))
+        parties = list(db.parties.find({}))
        
         self.partiesSet = set()
         
